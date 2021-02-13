@@ -1,0 +1,489 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+}
+
+header {
+  background-color: #1d72c2;
+  display: -ms-grid;
+  display: grid;
+  grid-row: 1fr 5fr 2fr;
+}
+
+header ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  float: right;
+}
+
+header ul li {
+  text-decoration: none;
+  list-style: none;
+  margin: 0 20px;
+  float: right;
+}
+
+header ul li a {
+  text-decoration: none;
+  color: white;
+}
+
+header ul li #contactos {
+  -webkit-text-decoration: 2px underline 5px;
+          text-decoration: 2px underline 5px;
+}
+
+header ul li #contactos::after {
+  content: "";
+  width: 100%;
+  color: white;
+  background: white;
+  position: absolute;
+  margin-top: 20px;
+}
+
+#section1 {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 4fr 1fr 1fr 2fr;
+      grid-template-columns: 4fr 1fr 1fr 2fr;
+  -ms-grid-rows: 1fr 2fr;
+      grid-template-rows: 1fr 2fr;
+}
+
+#section1 h1 {
+  margin-left: 30px;
+}
+
+#section1 #btn-search {
+  position: relative;
+  width: 20%;
+  height: 35px;
+  top: 80px;
+  right: 250px;
+  background-color: white;
+  color: #0683f9;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#section1 #jstree {
+  position: fixed;
+  left: 2.5%;
+  top: 20vh;
+  -ms-grid-column: 1;
+  grid-column: 1/1;
+  background-color: white;
+  border: 1px solid #ddd;
+}
+
+#section1 #jstree .caret {
+  cursor: pointer;
+  -webkit-user-select: none;
+  /* Safari 3.1+ */
+  -moz-user-select: none;
+  /* Firefox 2+ */
+  -ms-user-select: none;
+  /* IE 10+ */
+  user-select: none;
+  position: relative;
+  right: 5%;
+  bottom: 30px;
+}
+
+#section1 #jstree .caret::before {
+  content: "\25B6";
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+#section1 #jstree .caret-down::before {
+  /* IE 9 */
+  -webkit-transform: rotate(90deg);
+  /* Safari */
+  transform: rotate(90deg);
+}
+
+#section1 #jstree a {
+  text-decoration: none;
+  color: black;
+}
+
+#section1 #jstree li {
+  list-style: none;
+  margin: 20px 0px;
+}
+
+#section1 #jstree input {
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+#section1 #jstree .input-jstree {
+  position: relative;
+  left: 30%;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  width: 20%;
+}
+
+#section1 #contactos {
+  position: relative;
+  bottom: 40px;
+  width: 80%;
+  height: 50px;
+}
+
+#section1 .buttons {
+  -ms-grid-column: 4;
+  grid-column: 4/4;
+  -ms-grid-row: 2;
+  grid-row: 2/2;
+  position: relative;
+  top: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 10px;
+  right: 25px;
+}
+
+#section1 .buttons button, #section1 .buttons input {
+  border-color: #1d72c2;
+  background-color: white;
+  width: 45%;
+  height: 45px;
+  color: #1d72c2;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#section1 .buttons button:hover, #section1 .buttons input:hover {
+  background-color: #1d72c2;
+  border-color: white;
+  color: white;
+}
+
+#section1 .buttons input {
+  width: 50%;
+  cursor: pointer;
+}
+
+#section1 .buttons #upload {
+  position: relative;
+  width: 12.5%;
+  right: 10px;
+  height: 45px;
+}
+
+#section1 .modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 100px;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.9);
+  /* Black w/ opacity */
+  /* Modal Content (form and upload) */
+}
+
+#section1 .modal .modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  background-color: white;
+  height: 500px;
+}
+
+#section1 .modal .modal-content p {
+  position: relative;
+  width: 60%;
+  text-align: center;
+  left: 20%;
+  top: 115px;
+  font-size: 18px;
+}
+
+#section1 .modal #content-upload {
+  width: 50%;
+}
+
+#section1 .modal #icons-modal {
+  position: relative;
+  text-align: center;
+  position: relative;
+  top: 70px;
+}
+
+#section1 .modal #icons-modal i {
+  font-size: 86px;
+}
+
+#section1 .modal .btn-up {
+  margin: 0 20px;
+  border-color: #1d72c2;
+  background-color: white;
+  color: #1d72c2;
+  border-radius: 1px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#section1 .modal .btn-up:hover {
+  background-color: #1d72c2;
+  color: white;
+}
+
+#section1 .modal #buttons-upload {
+  left: 30%;
+  gap: 30px;
+}
+
+#section1 .modal .modal-title {
+  background-color: #1d72c2;
+  height: 140px;
+}
+
+#section1 .modal .modal-title h3 {
+  color: white;
+  position: relative;
+  left: 5%;
+  top: 30px;
+}
+
+#section1 .modal .modal-title button, #section1 .modal .modal-title .buttons input, #section1 .buttons .modal .modal-title input {
+  position: relative;
+  float: right;
+  right: 20px;
+  bottom: 10px;
+  background-color: #1d72c2;
+  border: none;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+#section1 .modal .modal-head {
+  position: absolute;
+  top: 210px;
+  left: 12.5%;
+  background-color: white;
+  border: 4px solid #0683f9;
+  border-radius: 8px;
+  width: 75%;
+  height: 120px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#section1 .modal .modal-head button, #section1 .modal .modal-head .buttons input, #section1 .buttons .modal .modal-head input {
+  position: relative;
+  top: 10px;
+  font-size: 60px;
+  height: 90px;
+  width: 90px;
+  border-radius: 50%;
+  left: 30px;
+  color: #0683f9;
+  border-color: #0683f9;
+  cursor: pointer;
+}
+
+#section1 .modal .modal-head .fa-camera {
+  position: relative;
+}
+
+#section1 .modal .modal-head #camera {
+  position: relative;
+  top: 80px;
+  color: white;
+  border: 1px solid #0683f9;
+  height: 17.5px;
+  width: 17.5px;
+  border-radius: 50%;
+  background-color: #0683f9;
+}
+
+#section1 .modal .modal-head form {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  left: 7.5%;
+  gap: 10px;
+  top: 15px;
+  width: 80%;
+}
+
+#section1 .modal .modal-head form .form-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: relative;
+}
+
+#section1 .modal .modal-head form input[type=text], #section1 .modal .modal-head form input[type=email] {
+  position: relative;
+  width: 80%;
+  height: 2px;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: 2px solid #ddd;
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+#section1 .modal .modal-form {
+  position: relative;
+  top: 100px;
+  width: 80%;
+  right: 40px;
+}
+
+#section1 .modal .modal-form form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 10px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+#section1 .modal .modal-form form .form-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: relative;
+  left: 15%;
+}
+
+#section1 .modal .modal-form form select, #section1 .modal .modal-form form input {
+  margin: 5px;
+  position: relative;
+  width: 145px;
+  height: 25px;
+}
+
+#section1 .modal .modal-form form input {
+  height: 20px;
+}
+
+#section1 .modal .modal-form form button, #section1 .modal .modal-form form .buttons input, #section1 .buttons .modal .modal-form form input {
+  position: relative;
+  left: 20%;
+  height: 28px;
+  top: 24px;
+  background-color: white;
+  color: gray;
+  border-color: gray;
+  cursor: pointer;
+}
+
+#section1 .modal .modal-footer {
+  position: relative;
+  top: 35%;
+  left: 70%;
+}
+
+#section1 .modal .modal-footer .modal-button {
+  position: relative;
+  width: 14%;
+  height: 40px;
+  cursor: pointer;
+}
+
+#section1 .modal .modal-footer #modal-guardar {
+  background-color: gray;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+#section1 .modal .modal-footer #modal-cancelar {
+  background-color: white;
+  border: none;
+}
+
+.table-order table {
+  border-collapse: collapse;
+  width: 95%;
+  border: 1px solid #ddd;
+  margin: 2.5%;
+  font-weight: normal;
+}
+
+.table-order table th {
+  font-weight: normal;
+  padding: 30px;
+  border-bottom: 1px solid #ddd;
+}
+
+.table-order table td {
+  text-align: center;
+  padding: 12px;
+}
+
+.table-order table td .container-interes {
+  width: 100%;
+  height: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-color: #ddd;
+  border-radius: 10px;
+}
+
+.table-order table td .color-interes-75, .table-order table td .color-interes-50 {
+  width: 75%;
+  height: 10px;
+  background-color: #ff6f00;
+  border-radius: 10px;
+}
+
+.table-order table td .color-interes-50 {
+  width: 50%;
+  background-color: #ffc700;
+}
+/*# sourceMappingURL=Header.css.map */

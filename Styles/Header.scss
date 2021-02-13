@@ -1,0 +1,395 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+}
+
+header {
+  background-color: #1d72c2;
+  display: grid;
+  grid-row: 1fr 5fr 2fr;
+  ul {
+    display: flex;
+    flex-direction: row;
+    float: right;
+    li {
+      text-decoration: none;
+      list-style: none;
+      margin: 0 20px;
+      float: right;
+      a {
+        text-decoration: none;
+        color: white;
+      }
+      #contactos {
+        text-decoration: 2px underline 5px;
+      }
+      #contactos::after {
+        content: "";
+        width: 100%;
+        color: white;
+        background: white;
+        position: absolute;
+        margin-top: 20px;
+      }
+    }
+  }
+}
+
+#section1 {
+  display: grid;
+  grid-template-columns: 4fr 1fr 1fr 2fr;
+  grid-template-rows: 1fr 2fr;
+  h1 {
+    margin-left: 30px;
+  }
+  #btn-search{
+    position: relative;
+    width: 20%;
+    height: 35px;
+    top: 80px;
+    right: 250px;
+    background-color: white;
+    color: #0683f9;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  #jstree {
+    position: fixed;
+    left: 2.5%;
+    top: 20vh;
+
+    grid-column: 1/1;
+    background-color: white;
+    border: 1px solid #ddd;
+
+    .caret {
+      cursor: pointer;
+      -webkit-user-select: none; /* Safari 3.1+ */
+      -moz-user-select: none; /* Firefox 2+ */
+      -ms-user-select: none; /* IE 10+ */
+      user-select: none;
+      position: relative;
+      right: 5%;
+      bottom: 30px;
+    }
+
+    .caret::before {
+      content: "\25B6";
+      color: black;
+      display: inline-block;
+      margin-right: 6px;
+    }
+
+    .caret-down::before {
+      -ms-transform: rotate(90deg); /* IE 9 */
+      -webkit-transform: rotate(90deg); /* Safari */
+      transform: rotate(90deg);
+    }
+    a {
+      text-decoration: none;
+      color: black;
+    }
+    li {
+      list-style: none;
+      margin: 20px 0px;
+    }
+    input {
+      align-content: center;
+    }
+    .input-jstree {
+      position: relative;
+      left: 30%;
+      align-content: center;
+      width: 20%;
+    }
+  }
+
+  #contactos {
+    position: relative;
+
+    bottom: 40px;
+    width: 80%;
+    height: 50px;
+  }
+  .buttons {
+    grid-column: 4/4;
+    grid-row: 2/2;
+    position: relative;
+    top: 40px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    right: 25px;
+    button {
+      border-color: #1d72c2;
+      background-color: white;
+      width: 45%;
+      height: 45px;
+      color: #1d72c2;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #1d72c2;
+      border-color: white;
+      color: white;
+    }
+    input {
+      @extend button;
+      width: 50%;
+      cursor: pointer;
+    }
+    #upload{
+      position: relative;
+      width: 12.5%;
+      right: 10px;
+      height: 45px;
+    }
+  }
+  .modal {
+    display: none;/* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
+
+    /* Modal Content (form and upload) */
+    .modal-content {
+      margin: auto;
+      display: block;
+      width: 80%;
+      background-color: white;
+      height: 500px;
+      p{
+        position: relative;
+        width: 60%;
+        text-align: center;
+        left: 20%;
+        top: 115px;
+        font-size: 18px;
+      }
+    }
+    #content-upload{
+      width: 50%;
+    }
+    #icons-modal{
+      position: relative;
+      text-align: center;
+      position: relative;
+      top: 70px;
+      i{
+        font-size: 86px;
+      }
+    }
+    .btn-up{
+      margin: 0 20px;
+      border-color: #1d72c2;
+      background-color: white;
+      color: #1d72c2;
+      border-radius: 1px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .btn-up:hover{
+      background-color:#1d72c2;
+      color: white;
+    }
+    #buttons-upload{
+      left: 30%;
+      gap: 30px;
+    }
+    .modal-title{
+        background-color: #1d72c2;
+        height: 140px;
+        h3{
+            color: white;
+            position: relative;
+            left: 5%;
+            top: 30px;
+        }
+        button{
+            position: relative;
+            float: right;
+            right: 20px;
+            bottom: 10px;
+            background-color: #1d72c2;
+            border: none;
+            color: white;
+            font-size: 25px;
+            cursor: pointer;
+        }
+    }
+    .modal-head{
+        position: absolute;
+        top: 210px;
+        left: 12.5%;
+        background-color: white;
+        border: 4px solid #0683f9;
+        border-radius: 8px;
+        width: 75%;
+        height: 120px;
+        display: flex;
+        button{
+            position: relative;
+            top: 10px;
+            font-size: 60px;
+            height: 90px;
+            width: 90px;
+            border-radius: 50%;
+            left: 30px;
+            color: #0683f9;
+            border-color: #0683f9;
+            cursor: pointer;
+        }
+        .fa-camera{
+            position: relative;
+            
+        }
+        #camera{
+            position: relative;
+            top: 80px;
+           
+            color: white;
+            border: 1px solid #0683f9;
+            height: 17.5px;
+            width: 17.5px;
+            border-radius: 50%;
+            background-color: #0683f9;
+        }
+        form{
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            left: 7.5%;
+            gap: 10px;
+            top: 15px;
+            width: 80%;
+            .form-block{
+                display: flex;
+                flex-direction: column;
+                position: relative;
+                
+            }
+            input[type=text], input[type=email] {
+                position: relative;
+                width: 80%;
+                height: 2px;
+                padding: 15px;
+                margin: 5px 0 22px 0;
+                display: inline-block;
+                border: 2px solid #ddd;
+                background: #f1f1f1;
+                border-radius: 4px;
+               
+              }
+        }
+        
+       
+    }
+    .modal-form{
+        position: relative;
+        top: 100px;
+        width: 80%;
+        right: 40px;
+       form{
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        flex-wrap: wrap;
+        .form-block{
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            left: 15%;
+        }
+        select{
+            margin: 5px;
+            position: relative;
+            width: 145px;
+            height: 25px;
+        }
+        input{
+            @extend select;
+            height: 20px;
+        }
+        button{
+            position: relative;
+            left: 20%;
+            height: 28px;
+            top: 24px;
+            background-color: white;
+            color: gray;
+            border-color: gray;
+            cursor: pointer;
+        }
+       }
+
+    }
+    .modal-footer{
+        position: relative;
+        top: 35%;
+        left: 70%;
+        .modal-button{
+            position: relative;
+            width: 14%;
+            height: 40px;
+            cursor: pointer;
+        }
+        #modal-guardar{
+            background-color: gray;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        #modal-cancelar{
+            background-color: white;
+            border: none;
+        }
+    }
+  }
+}
+
+.table-order {
+  table {
+    border-collapse: collapse;
+    width: 95%;
+    border: 1px solid #ddd;
+    margin: 2.5%;
+    font-weight: normal;
+    th {
+      font-weight: normal;
+      padding: 30px;
+      border-bottom: 1px solid #ddd;
+    }
+    td {
+      text-align: center;
+      padding: 12px;
+      .container-interes {
+        width: 100%;
+        height: 10px;
+        box-sizing: border-box;
+        background-color: #ddd;
+        border-radius: 10px;
+      }
+      .color-interes-75 {
+        width: 75%;
+        height: 10px;
+        background-color: #ff6f00;
+        border-radius: 10px;
+      }
+      .color-interes-50 {
+        @extend .color-interes-75;
+        width: 50%;
+        background-color: #ffc700;
+      }
+    }
+  }
+}

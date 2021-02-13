@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../DataWarehouse/Styles/Header.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+    <title>Region/Ciudad</title>
+</head>
+<style>
+    #ag-reg{
+        float: right;
+        position: relative;
+        margin: 2.5%;
+        border-color: #1d72c2;
+  background-color: white;
+  width: 20%;
+  height: 45px;
+  color: #1d72c2;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+    }
+    #ag-reg:hover{
+        background-color: #1d72c2;
+  border-color: white;
+  color: white;
+    }
+    .jstree{
+        position: relative;
+        margin: 5% 15%;
+        font-size: 22px;
+    }
+    .btn-pais{
+        position: relative;
+        float: right;
+        background-color: #1d72c2;
+  border-color: white;
+  color: white;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  height: 35px;
+    }
+    .btn-ciudad{
+        osition: relative;
+        float: right;
+        background-color: white;
+  border-color: #8ec7fc;
+  color: #429c41;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  height: 35px;
+    }
+</style>
+<body>
+    <header>
+        <img src="" alt="" />
+        <nav>
+          <ul>
+            <li><a href="Header.html" id="contactos">Contactos</a></li>
+            <li><a href="Usuarios.html">Usuarios</a></li>
+            <li><a href="Compañias.html">Compañias</a></li>
+            <li><a href="">Región/Ciudad</a></li>
+          </ul>
+        </nav>
+      </header>
+      <button id="ag-reg">Agregar Región</button>
+      <div class="jstree">
+          <ul>
+              <li>Región
+                  <ul>
+                      <li>Norte-América
+                          <ul>
+                              <li>Pais <button class="btn-pais">Agregar País</button>
+                                  <ul>
+                                      <li>Estados Unidos <ul>
+                                          <li>Ciudad <button class="btn-ciudad">Agregar Ciudad</button>
+                                              <ul>
+                                                  <li>San Francisco
+                                              </li>
+                                              <li>Nueva York</li>
+                                              <li>Los Angeles</li>
+                                            </ul>
+                                          </li>
+                                      </ul></li>
+                                      <li>Mexico <ul>
+                                          <li>Ciudad <button class="btn-ciudad">Agregar Ciudad</button>
+                                              <ul>
+                                                  <li>Mexico D.F.</li>
+                                                  <li>Tijuana</li>
+                                                  <li>Acapulco</li>
+                                              </ul>
+                                          </li>
+                                      </ul></li>
+                                      <li>Canada <ul>
+                                          <li>Ciudad <button class="btn-ciudad">Agregar Ciudad</button>
+                                              <ul>
+                                                  <li>Toronto</li>
+                                                  <li>Vancouver</li>
+                                                  <li>Calgary</li>
+                                              </ul>
+                                          </li>
+                                      </ul></li>
+                                  </ul>
+                              </li>
+                          </ul>
+                      </li>
+                      <li>Centro-América <ul>
+                          <li>Pais <button class="btn-pais">Agregar País</button><ul>
+                              <li>Honduras <ul>
+                                  <li>Ciudad <button class="btn-ciudad">Agregar Ciudad</button> <ul>
+                                      <li>San Pedro</li>
+                                  </ul></li>
+                              </ul></li>
+                              <li>Costa Rica <ul>
+                                  <li>Ciudad  <button class="btn-ciudad">Agregar Ciudad</button><ul>
+                                      <li>San Jose</li>
+                                  </ul></li>
+                              </ul></li>
+                              <li>El Salvador <ul>
+                                  <li>Ciudad  <button class="btn-ciudad">Agregar Ciudad</button><ul>
+                                      <li>San Salvador</li>
+                                  </ul></li>
+                              </ul></li>
+                              <li>Guatemala <ul>
+                                  <li>Ciudad <button class="btn-ciudad">Agregar Ciudad</button><ul>
+                                      <li>Ciudad de Guatemala</li>
+                                  </ul></li>
+                              </ul></li>
+                          </ul></li>
+                      </ul></li>
+                      <li>Sud-América <ul>
+                      <li>Pais <button class="btn-pais">Agregar País</button><ul>
+                          <li>Argentina <ul>
+                              <li>Ciudad <button class="btn-ciudad">Agregar Ciudad</button><ul>
+                                  <li>Cordoba</li>
+                                  <li>Buenos Aires</li>
+                                  <li>Mendoza</li>
+                              </ul></li>
+                          </ul></li>
+                          <li>Chile <ul>
+                              <li>Ciudad <button class="btn-ciudad">Agregar Ciudad</button><ul>
+                                  <li>Santiago</li>
+                                  <li>Valparaiso</li>
+                                  <li>Antofagasta</li>
+                              </ul></li>
+                          </ul></li>
+                          <li>Peru <ul>
+                              <li>Ciudad <button class="btn-ciudad">Agregar Ciudad</button><ul>
+                                  <li>Cusco</li>
+                                  <li>Lima</li>
+                              </ul></li>
+                          </ul></li>
+                          <li>Colombia <ul>
+                              <li>Ciudad <button class="btn-ciudad">Agregar Ciudad</button><ul>
+                                  <li>Bogota</li>
+                                  <li>Cali</li>
+                                  <li>Medellín</li>
+                              </ul></li>
+                          </ul></li>
+                          <li>Brasil <ul>
+                              <li>Ciudad <button class="btn-ciudad">Agregar Ciudad</button><ul>
+                                  <li>San Pablo</li>
+                                  <li>Rio de Janeiro</li>
+                                  <li>Brasilia</li>
+                              </ul></li>
+                          </ul></li>
+                      </ul></li></li></ul></li>
+                  </ul>
+              </li>
+          </ul>
+      </div>
+</body>
+</html>
