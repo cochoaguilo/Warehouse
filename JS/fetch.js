@@ -1,7 +1,8 @@
 const container = document.getElementById('container-table');
+const endpointUsuarios = `http://localhost:4500/usuarios`;
 
 const getUsers = async () => {
-    const usersList = await fetch(`http://localhost:4500/usuarios`);
+    const usersList = await fetch(endpointUsuarios);
     const usersjson = await usersList.json();
     console.log(usersjson);
     fillUsersInfo(usersjson);
@@ -33,3 +34,16 @@ const getUsers = async () => {
   };
 
   getUsers();
+
+  const postUser = async() =>{
+   
+      const config = {
+        method: 'POST',
+        mode: 'cors',
+        body: body
+      }
+      try{
+        const newUser = await fetch(endpointUsuarios, config);
+        const data = await newUser.json();
+      }
+  }
