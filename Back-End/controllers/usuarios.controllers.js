@@ -1,7 +1,7 @@
 const sequelize = require('../conexion');
 
-const getUsuarios =  async (req, res) => {
-    const query = 'SELECT * FROM usuarios';
+const getContactos =  async (req, res) => {
+    const query = 'SELECT * FROM contactos';
     try {
       
       const u = await sequelize.query(query, {type:sequelize.QueryTypes.SELECT});
@@ -25,24 +25,50 @@ const newUsuario =   async(req, res) => {
     } catch(e) {
       console.log(e);
     }
-  };
-const logIN = async (req, res) => {
-    let { nombre, pass } = req.body;
-    usuarios.find((usuario) => {
-      if (nombre == usuario.nombre && pass == usuario.pass && email) {
-        let obj = {
-          id: usuario.id,
-          nombre: usuario.nombre,
-        };
+};
+let deleteContacto = async (req,res)=>{
+    const id = req.query.id_contacto;
+    const query = 'DELETE FROM contactos WHERE id_contacto= ?';
+    try{
+    sequelize.query(query, {
+      replacements:[id]
+    }).then((data => {
+      res.send({status: 'eliminado'});
+    }))}
+    catch(e){
+      res.status(400);
+      console.log(e)
+    }
+};
+let loginUsuario = async(req, res) => {
+  let clave = "marcos21";
+  const { correo } = req.body;
   
-        let token = jwt.sign(obj, clave);
-  
-        res.send(token);
-      } else {
-        res.status(401).send("usuario incorrecto");
-      }
+  try{
+    const query = `SELECT * FROM usuarios
+  WHERE correo = ? LIMIT 1`;
+    let result = await sequelize.query(query,{replacements:[correo],
+      type:sequelize.QueryTypes.SELECT
     });
-  });
+    console.log(result);
+    if(result.length ==0){
+      res.send("usuario incorrecto");
+      //console.log(result);
+    }
+    if (result.length == 1) {
+      console.log(result)
+      let token = jwt.sign({correo: result.correo, tipo: result.id_role}, clave);
+      
+      res.status(200).json({msj: 'usuario loggeado', token: token})
+    } 
+    
+    }
+  catch (e){
+    console.log(e);
+  }
+};
 
-exports.getUsuarios = getUsuarios;
+exports.getContactos = getContactos;
 exports.newUsuario = newUsuario;
+exports.deleteContacto = deleteContacto;
+exports.loginUsuario = loginUsuario;

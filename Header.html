@@ -117,7 +117,7 @@
           <div class="modal-head">
             <button class="btn"><i class="fa fa-user"></i></button>
             <i class="fa fa-camera" id="camera"></i>
-            <form action="" method="post">
+            <form id="info-form" action="http://localhost:4500/usuarios" method="POST">
 
               <div class="form-block">
                 <label for="nombre">Nombre</label>
@@ -147,7 +147,7 @@
             </form>
           </div>
           <div class="modal-form">
-            <form action="" method="post">
+            <form action="http://localhost:4500/usuarios" method="POST">
               <div class="form-block">
                 <label for="region">Region</label>
                 <select name="region" id="region">
@@ -203,7 +203,7 @@
           </div>
           <div class="modal-footer">
             <button id="modal-cancelar" class="modal-button">Cancelar</button>
-            <button id="modal-guardar" class="modal-button">Guardar contacto</button>
+            <button id="modal-guardar" class="modal-button" type="submit">Guardar contacto</button>
           </div>
         </div>
       </div>
@@ -254,5 +254,6 @@
 <script src="../DataWarehouse/JS/index.js"></script>
 <script src="../DataWarehouse/JS/fetch.js"></script>
 <script src="../DataWarehouse/JS/modal.js"></script>
+<script src="../DataWarehouse/JS/form.js"></script>
 
 </html>

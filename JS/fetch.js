@@ -1,6 +1,7 @@
 const container = document.getElementById('container-table');
 const endpointUsuarios = `http://localhost:4500/usuarios`;
 
+
 const getUsers = async () => {
     const usersList = await fetch(endpointUsuarios);
     const usersjson = await usersList.json();
@@ -8,7 +9,7 @@ const getUsers = async () => {
     fillUsersInfo(usersjson);
   };
 
-  const fillUsersInfo = (userList) => {
+const fillUsersInfo = (userList) => {
    /* usersListHTML.innerHTML += `<tr>
       <th>Firstname</th>
       <th>Lastname</th> 
@@ -35,7 +36,7 @@ const getUsers = async () => {
 
   getUsers();
 
-  const postUser = async() =>{
+  const postUser = async(body) =>{
    
       const config = {
         method: 'POST',
@@ -45,5 +46,19 @@ const getUsers = async () => {
       try{
         const newUser = await fetch(endpointUsuarios, config);
         const data = await newUser.json();
+        console.log(data);
+      }catch(e){
+        console.log(e);
       }
-  }
+  };
+
+  
+
+  $('.modal-form').submit(function (e) { 
+    e.preventDefault();
+
+    const formData = new FormData(this);
+    postUser(formData);
+  });
+
+  
