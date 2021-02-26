@@ -1,74 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Styles-->
     <link rel="stylesheet" href="../DataWarehouse/Styles/Header.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"
       rel="stylesheet"
     />
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="./Styles/compania.css">
+    <link rel="stylesheet" href="./Styles/modal.css">
+
+    <!--Iconocs-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
     <title>Compañias</title>
-</head>
-<style>
-    h1{
-        position: relative;
-        top: 50px;
-        left: 30px;
-        width: 20%;
-    }
-    table{
-        position: relative;
-        top: 100px;
-    }
-    button {
-        position: relative;
-      border-color: #1d72c2;
-      background-color: white;
-      width: 15%;
-      height: 45px;
-      right: 100px;
-      float: right;
-      color: #1d72c2;
-      border-radius: 4px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #1d72c2;
-      border-color: white;
-      color: white;
-    }
-</style>
-<body>
+  </head>
+  
+  <body>
     <header>
-        <img src="" alt="" />
-        <nav>
-          <ul>
-            <li><a href="Header.html" id="contactos">Contactos</a></li>
-            <li><a href="Usuarios.html">Usuarios</a></li>
-            <li><a href="">Compañias</a></li>
-            <li><a href="Region-Ciudad.html">Región/Ciudad</a></li>
-          </ul>
-        </nav>
-      </header>
-      <section class="table-order">
-          <h1>Compañias</h1>
-          <button>Agregar</button>
-          <table>
-              <th>Nombre</th>
-              <th>Pais</th>
-              <th>Direccion</th>
-              <th>Email</th>
-              <th>Telefono</th>
-              <th>Ciudad</th>
-              <th>Acciones</th>
-          </table>
+      <img src="" alt="" />
+      <nav>
+        <ul>
+          <li><a href="Header.html" id="contactos">Contactos</a></li>
+          <li><a href="Usuarios.html">Usuarios</a></li>
+          <li><a href="">Compañias</a></li>
+          <li><a href="Region-Ciudad.html">Región/Ciudad</a></li>
+        </ul>
+      </nav>
+    </header>
+   <section class="table-order">
+      <h1>Compañias</h1>
+      <button id="ag-compania">Agregar</button>
+      <table id="container" class="display" style="width: 100%;">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Pais</th>
+            <th>Direccion</th>
+            <th>Email</th>
+            <th>Telefono</th>
+            <th>Ciudad</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+      </table>
       </section>
-</body>
+    <!-- Modal Contactos-->
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-title">
+          <h3>Nueva Compañia</h3>
+          <button class="btn" id="close-modal"><i class="fa fa-close"></i></i></button>
+          
+        </div>
+        <div class="modal-head">
+          
+          <form id="info-form" action="http://localhost:4500/usuarios" method="POST">
+
+            <div class="form-block">
+              <label for="nombre">Nombre</label>
+              <input type="text" name="nombre" id="nombre">
+            </div>
+
+            <div class="form-block">
+              <label for="correo">Correo</label>
+              <input type="text" name="correo" id="correo">
+            </div>
+
+            <div class="form-block">
+              <label for="Telefono">Telefono</label>
+              <input type="tel" name="Telefono" id="Telefono">
+            </div>
+
+            <div class="form-block">
+              <label for="direccion">Direccion</label>
+              <input type="text" name="direccion" id="direccion">
+            </div>
+
+            <div class="form-block">
+              <label for="ciudad">Ciudad</label>
+              <input type="text" name="ciudad" id="ciudad">
+            </div>
+            
+          </form>
+          
+        </div>
+        <div class="modal-footer">
+          <button id="modal-cancelar" class="modal-button">Cancelar</button>
+          <button id="modal-guardar" class="modal-button" type="submit">Guardar compañia</button>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    
+    <script src="./JS/fetch.js"></script>
+    <script src="./JS/companias.js"></script>
+  </body>
 </html>

@@ -1,4 +1,5 @@
 const sequelize = require('../conexion');
+let jwt = require('jsonwebtoken');
 
 const getContactos =  async (req, res) => {
     const query = 'SELECT * FROM contactos';
@@ -57,7 +58,7 @@ let loginUsuario = async(req, res) => {
     }
     if (result.length == 1) {
       console.log(result)
-      let token = jwt.sign({correo: result.correo, tipo: result.id_role}, clave);
+      let token = jwt.sign({correo: result.correo, tipo: result.id_perfil}, clave);
       
       res.status(200).json({msj: 'usuario loggeado', token: token})
     } 

@@ -18,9 +18,11 @@ app.use(bodyParser.urlencoded({ extended: true, limit:'50mb' }));
 // /usuarios
 const usuariosRoutes = require('./routes/usuarios.routes');
 const regionRoutes = require('./routes/region.routes')
+const companiasRoutes = require('./routes/compañias.routes')
 
 app.use('/usuarios',usuariosRoutes);
 app.use('/regiones', regionRoutes);
+app.use('/companias',companiasRoutes)
 
 
 
