@@ -20,27 +20,33 @@ const newCompania =   async(req, res) => {
     
     
     try {
-      const {nombre, direccion, correo, telefono, ciudad} = req.body;
-      const queryCiudad = 
-            `SELECT id_ciudad
-            FROM ciudades
-            WHERE ciudades.nombre = ${ciudad}`;
-            console.log(queryCiudad);
-      /*const query = `INSERT INTO compania (nombre, direccion, correo, 
+     // const {nombre, direccion, correo, telefono, ciudad} = req.body;
+     const queryCiudad =  `SELECT id_ciudad
+    FROM ciudades
+    WHERE nombre = ?`;
+    
+     let Ciudad =  await sequelize.query(queryCiudad, {
+        replacements: [
+          req.query.ciudad
+        ]
+      })
+
+     const query = `INSERT INTO compania (nombre, direccion, correo, 
             telefono, id_ciudad) 
-            VALUES (?,?,?,?,${queryCiudad})`;
+            VALUES (?,?,?,?,${Ciudad})`;
     
       await sequelize.query(query, {
         replacements: [
-          nombre, direccion, correo, telefono, queryCiudad
+          nombre, direccion, correo, telefono, Ciudad
         ]
       }).then((response)=>{
-        res.send({mensaje: 'enviado', usuario: req.body});
-      })*/
+        console.log(response);
+        res.status(201).json({mensaje: 'enviado', usuario: req.body});
+      })
     } catch(e) {
       console.log(e);
     }
-};
+}
 let deleteCompania = async (req,res)=>{
     const id = req.query.id_contacto;
     const query = 'DELETE FROM compania WHERE id_compania= ?';

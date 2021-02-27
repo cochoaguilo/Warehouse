@@ -23,7 +23,20 @@ $(document).ready( function () {
     
 })
    .catch(e=>console.log(e));
+
+   $('#compania-form').submit(function (e) { 
+       e.preventDefault();
+       let nombre = document.getElementsByName("nombre")[0].value,
+            ciudad = document.getElementsByName("ciudad")[0].value,
+            correo = document.getElementsByName("correo")[0].value,
+            telefono = document.getElementsByName("Telefono")[0].value,
+            direccion = document.getElementsByName("direccion")[0].value,
+            ciudad = document.getElementsByName("ciudad")[0].value
+
+            
+   });
    
+  // apiFetchPOST(companiasEndpoint, bodyPOSTCompanias, 'POST');
 } );
 
 
