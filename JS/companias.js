@@ -30,13 +30,24 @@ $(document).ready( function () {
             ciudad = document.getElementsByName("ciudad")[0].value,
             correo = document.getElementsByName("correo")[0].value,
             telefono = document.getElementsByName("Telefono")[0].value,
-            direccion = document.getElementsByName("direccion")[0].value,
-            ciudad = document.getElementsByName("ciudad")[0].value
+            direccion = document.getElementsByName("direccion")[0].value
 
+        let bodyPOSTCompanias = {
+            nombre:nombre,
+            ciudad:ciudad,
+            corre: correo,
+            telefono: telefono,
+            direccion:direccion
+        }
+
+        let formData =new FormData();
+        formData.append('data', bodyPOSTCompanias);
+            console.log(formData);
+            apiFetchPOST(companiasEndpoint, formData);
             
    });
    
-  // apiFetchPOST(companiasEndpoint, bodyPOSTCompanias, 'POST');
+  
 } );
 
 

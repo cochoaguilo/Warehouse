@@ -1,8 +1,11 @@
 const sequelize = require('../conexion');
 
 const getRegiones =  async (req, res) => {
-    const query = `SELECT * FROM ciudades
-                   LEFT JOIN   `;
+    const query = `SELECT c.id_ciudad, c.nombre nombre_ciudad, 
+                  p.nombre nombre_pais, r.nombre nombre_region
+                  FROM ciudades c
+                  LEFT JOIN paises p using(id_pais)
+                  LEFT JOIN regiones r using(id_region) `;
     try {
       
       const u = await sequelize.query(query, {type:sequelize.QueryTypes.SELECT});

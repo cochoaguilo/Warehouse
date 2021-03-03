@@ -1,6 +1,6 @@
 
 
-$(window).ready(function(){
+/*$(window).ready(function(){
    
    
       // 8 interact with the tree - either way is OK
@@ -21,7 +21,7 @@ $(window).ready(function(){
 
 
 
-})
+})*/
 let form = document.getElementById('form-login')
 
 
@@ -29,15 +29,17 @@ $('#form-login').submit(function (e) {
   e.preventDefault();
   
   let email = document.getElementsByName('correo')[0].value
-  let password = document.getElementsByName('contrasena')[0].value
+  let contrasena = document.getElementsByName('contrasena')[0].value
   
   const body ={
     correo:email,
-    constrasena: password
+    constrasena: contrasena
   }
-  //const formData = new FormData();
-  console.log(body);
-  apiFetchPOST("/usuarios/login", body, "POST").then(data=>{
+  const formData = new FormData();
+  formData.append('body',body)
+  //console.log(body);
+  apiFetchPOST('/usuarios/login', formData).then(data=>{
+    console.log(data);
     if(data.token){
     alert(data.msj)
     window.location.href = "./Header.html"

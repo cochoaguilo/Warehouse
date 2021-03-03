@@ -7,7 +7,7 @@ const middleware = require('../middleware')
 
 router.get('/',usuariosController.getContactos);
 
-router.post('/', middleware.autentificarAdmin, usuariosController.newUsuario)
+router.post('/', /*middleware.autentificarAdmin*/ usuariosController.newUsuario)
 router.post('/login',usuariosController.loginUsuario)
 
 //router.put('/:id',usuariosController)

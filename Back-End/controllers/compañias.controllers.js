@@ -20,28 +20,30 @@ const newCompania =   async(req, res) => {
     
     
     try {
-     // const {nombre, direccion, correo, telefono, ciudad} = req.body;
+     const {nombre, direccion, correo, telefono, ciudad} = req.body;
      const queryCiudad =  `SELECT id_ciudad
     FROM ciudades
-    WHERE nombre = ?`;
+    WHERE nombre = '${ciudad}'`;
+
+    let Ciudad = await sequelize.query(queryCiudad, {type:sequelize.QueryTypes.SELECT});
     
-     let Ciudad =  await sequelize.query(queryCiudad, {
-        replacements: [
-          req.query.ciudad
-        ]
-      })
+      
+    console.log(Ciudad[0].id_ciudad);
+    
+     //let Ciudad = queryCiudad.indexOf(ciudad);
+     
 
      const query = `INSERT INTO compania (nombre, direccion, correo, 
             telefono, id_ciudad) 
-            VALUES (?,?,?,?,${Ciudad})`;
+            VALUES (?,?,?,?,${Ciudad[0].id_ciudad})`;
     
       await sequelize.query(query, {
         replacements: [
-          nombre, direccion, correo, telefono, Ciudad
+          nombre, direccion, correo, telefono
         ]
       }).then((response)=>{
         console.log(response);
-        res.status(201).json({mensaje: 'enviado', usuario: req.body});
+        res.status(201).json({mensaje: 'enviado'});
       })
     } catch(e) {
       console.log(e);

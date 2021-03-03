@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../DataWarehouse/Styles/Header.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
@@ -14,70 +14,71 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
     <title>Region/Ciudad</title>
-</head>
-<style>
-    #ag-reg{
-        float: right;
-        position: relative;
-        margin: 2.5%;
-        border-color: #1d72c2;
-  background-color: white;
-  width: 20%;
-  height: 45px;
-  color: #1d72c2;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
+  </head>
+  <style>
+    #ag-reg {
+      float: right;
+      position: relative;
+      margin: 2.5%;
+      border-color: #1d72c2;
+      background-color: white;
+      width: 20%;
+      height: 45px;
+      color: #1d72c2;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
     }
-    #ag-reg:hover{
-        background-color: #1d72c2;
-  border-color: white;
-  color: white;
+    #ag-reg:hover {
+      background-color: #1d72c2;
+      border-color: white;
+      color: white;
     }
-    .jstree{
-        position: relative;
-        margin: 5% 15%;
-        font-size: 22px;
+    .jstree {
+      position: relative;
+      top: 60px;
+      margin: 5% 15%;
+      font-size: 22px;
     }
-    .btn-pais{
-        position: relative;
-        float: right;
-        background-color: #1d72c2;
-  border-color: white;
-  color: white;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-  height: 35px;
+    .btn-pais {
+      position: relative;
+      float: right;
+      background-color: #1d72c2;
+      border-color: white;
+      color: white;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      height: 35px;
     }
-    .btn-ciudad{
-        position: relative;
-        float: right;
-        background-color: white;
-  border-color: #8ec7fc;
-  color: #429c41;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-  height: 35px;
+    .btn-ciudad {
+      position: relative;
+      float: right;
+      background-color: white;
+      border-color: #8ec7fc;
+      color: #429c41;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      height: 35px;
     }
-</style>
-<body>
+  </style>
+  <body>
     <header>
-        <img src="" alt="" />
-        <nav>
-          <ul>
-            <li><a href="Header.html" id="contactos">Contactos</a></li>
-            <li><a href="Usuarios.html">Usuarios</a></li>
-            <li><a href="Companias.html">Compañias</a></li>
-            <li><a href="">Región/Ciudad</a></li>
-          </ul>
-        </nav>
-      </header>
-      <button id="ag-reg">Agregar Región</button>
-      <div class="jstree" id="jstree">
-          <!--<ul>
-              <li>Región
+      <img src="" alt="" />
+      <nav>
+        <ul>
+          <li><a href="Header.html" id="contactos">Contactos</a></li>
+          <li><a href="Usuarios.html">Usuarios</a></li>
+          <li><a href="Companias.html">Compañias</a></li>
+          <li><a href="">Región/Ciudad</a></li>
+        </ul>
+      </nav>
+    </header>
+    <button id="ag-reg">Agregar Región</button>
+    <div class="jstree" id="jstree">
+      <ul id="container">
+        <!--<li>Región
                   <ul>
                       <li>Norte-América
                           <ul>
@@ -177,9 +178,10 @@
                           </ul></li>
                       </ul></li></li></ul></li>
                   </ul>
-              </li>
-          </ul>-->
-      </div>
+              </li>-->
+      </ul>
+    </div>
+    <script src="../DataWarehouse/JS/fetch.js"></script>
     <script src="../DataWarehouse/JS/region.js"></script>
-</body>
+  </body>
 </html>

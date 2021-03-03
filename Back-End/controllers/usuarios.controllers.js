@@ -1,5 +1,7 @@
 const sequelize = require('../conexion');
 let jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 const getContactos =  async (req, res) => {
     const query = 'SELECT * FROM contactos';
@@ -13,12 +15,15 @@ const getContactos =  async (req, res) => {
   };
 
 const newUsuario =   async(req, res) => {
-    const query = 'INSERT INTO usuarios (nombre, apellido, email, telefono, direccion, pass) VALUES (?,?,?,?,?,?)';
+    const query = 
+    `INSERT INTO usuarios (nombre, apellido, correo, id_perfil, contrasena) 
+    VALUES (?,?,?,?,?)`;
     try {
-      const {nombre, apellido, email, telefono, direccion, pass} = req.body;
+      const {nombre, apellido, correo, id_perfil, contrasena} = req.body;
+      const hashedPassword = await bcrypt.hash(contrasena,saltRounds);
       sequelize.query(query, {
         replacements: [
-          nombre, apellido, email, telefono, direccion, pass
+          nombre, apellido, correo, id_perfil, hashedPassword
         ]
       }).then((response)=>{
         res.send({mensaje: 'enviado', usuario: req.body});
@@ -43,7 +48,7 @@ let deleteContacto = async (req,res)=>{
 };
 let loginUsuario = async(req, res) => {
   let clave = "marcos21";
-  const { correo } = req.body;
+  const { correo, contrasena } = req.body;
   
   try{
     const query = `SELECT * FROM usuarios
@@ -51,16 +56,20 @@ let loginUsuario = async(req, res) => {
     let result = await sequelize.query(query,{replacements:[correo],
       type:sequelize.QueryTypes.SELECT
     });
-    console.log(result);
+  
     if(result.length ==0){
       res.send("usuario incorrecto");
-      //console.log(result);
+      console.log(result);
     }
-    if (result.length == 1) {
-      console.log(result)
-      let token = jwt.sign({correo: result.correo, tipo: result.id_perfil}, clave);
+    if (result.length <= 1) {
       
-      res.status(200).json({msj: 'usuario loggeado', token: token})
+      let token = jwt.sign({correo: result.correo, tipo: result.id_perfil}, clave);
+     
+      if (await bcrypt.compare(contrasena, result[0].contrasena)) {
+        res.status(200).json({msj: 'usuario loggeado', token: token});
+      }else{
+        res.status(404).json({msj: 'contraseña incorrecta'});
+      }
     } 
     
     }

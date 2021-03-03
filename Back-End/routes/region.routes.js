@@ -5,9 +5,9 @@ const upload = multer({dest: 'mysql://root:@localhost:3306/warehouse'});
 const regionControllers = require('../controllers/region.controllers');
 const middleware = require('../middleware')
 
-router.get('/',middleware.autentificarAdmin, middleware.autentificarUser, regionControllers.getRegiones)
+router.get('/',/*middleware.autentificarAdmin, middleware.autentificarUser*/ regionControllers.getRegiones)
 
-router.post('/', middleware.autentificarAdmin,middleware.autentificarUser, regionControllers.newRegion)
+router.post('/',/* middleware.autentificarAdmin,middleware.autentificarUser*/ regionControllers.newRegion)
 
 //router.put('/:id', upload.single('nombre'), regionControllers.updateAlbum)
 
