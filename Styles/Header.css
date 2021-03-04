@@ -74,9 +74,10 @@ header ul li #contactos::after {
 }
 
 #section1 #jstree {
-  position: fixed;
+  position: absolute;
   left: 2.5%;
   top: 20vh;
+  z-index: 4;
   -ms-grid-column: 1;
   grid-column: 1/1;
   background-color: white;

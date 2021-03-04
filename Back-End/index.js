@@ -11,18 +11,22 @@ const bodyParser = require("body-parser");
 
 //app.use(helmet());
 app.use(cors());
-app.use(bodyParser.json({ limit: "100mb" }));
-app.use(bodyParser.urlencoded({ extended: true, limit:'100mb' }));
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ extended: true, limit:'50mb' }));
 
 
 // /usuarios
-const usuariosRoutes = require('./routes/usuarios.routes');
+const contactosRoutes = require('./routes/contactos.routes');
 const regionRoutes = require('./routes/region.routes')
 const companiasRoutes = require('./routes/compañias.routes')
+const paisesRoutes = require('./routes/pais.routes')
+const ciudadesRoutes = require('./routes/ciudades.routes')
 
-app.use('/usuarios',usuariosRoutes);
+app.use('/contactos',contactosRoutes);
 app.use('/regiones', regionRoutes);
-app.use('/companias',companiasRoutes)
+app.use('/companias',companiasRoutes);
+app.use('/paises', paisesRoutes);
+app.use('/ciudades', ciudadesRoutes);
 
 
 

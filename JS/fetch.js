@@ -15,7 +15,7 @@ const apiFetchGET = async (endpoint) => {
 
 
 
-const apiFetchPOST = async (endpoint, body) => {
+const apiFetchPOST = async (endpoint, bodyFETCH) => {
     try {
         let response = await fetch(baseURL+endpoint, {
             method: 'POST',
@@ -23,7 +23,7 @@ const apiFetchPOST = async (endpoint, body) => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(body)
+            body: JSON.stringify(bodyFETCH)
         });
         response = await response.json();
         return response;

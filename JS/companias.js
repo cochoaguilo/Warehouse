@@ -23,34 +23,34 @@ $(document).ready( function () {
     
 })
    .catch(e=>console.log(e));
-
-   $('#compania-form').submit(function (e) { 
-       e.preventDefault();
-       let nombre = document.getElementsByName("nombre")[0].value,
-            ciudad = document.getElementsByName("ciudad")[0].value,
-            correo = document.getElementsByName("correo")[0].value,
-            telefono = document.getElementsByName("Telefono")[0].value,
-            direccion = document.getElementsByName("direccion")[0].value
-
-        let bodyPOSTCompanias = {
-            nombre:nombre,
-            ciudad:ciudad,
-            corre: correo,
-            telefono: telefono,
-            direccion:direccion
-        }
-
-        let formData =new FormData();
-        formData.append('data', bodyPOSTCompanias);
-            console.log(formData);
-            apiFetchPOST(companiasEndpoint, formData);
-            
-   });
    
   
 } );
 
+const nombre = document.getElementById("nombre"),
+            ciudad = document.getElementById("ciudad"),
+            correo = document.getElementById("correo"),
+            telefono = document.getElementById("Telefono"),
+            direccion = document.getElementById("direccion")
+   $('#compania-form').submit(function (e) { 
+       e.preventDefault();
+       
 
+        let bodyPOSTCompanias = {
+            nombre: nombre.value,
+            direccion: direccion.value,
+            correo: correo.value,
+            telefono: telefono.value,
+            ciudad: ciudad.value
+        }
+        
+        apiFetchPOST(companiasEndpoint, bodyPOSTCompanias)
+        .then(data => {console.log(data)
+    
+        }
+        );
+            
+   });
 $('#ag-compania').click(function (e) { 
     e.preventDefault();
     $('#myModal').css('display', 'block');

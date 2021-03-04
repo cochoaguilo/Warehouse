@@ -55,10 +55,10 @@ header {
     cursor: pointer;
   }
   #jstree {
-    position: fixed;
+    position: absolute;
     left: 2.5%;
     top: 20vh;
-
+   z-index: 4;
     grid-column: 1/1;
     background-color: white;
     border: 1px solid #ddd;

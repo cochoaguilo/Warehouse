@@ -20,6 +20,7 @@ const newCompania =   async(req, res) => {
     
     
     try {
+      console.log(req.body);
      const {nombre, direccion, correo, telefono, ciudad} = req.body;
      const queryCiudad =  `SELECT id_ciudad
     FROM ciudades
