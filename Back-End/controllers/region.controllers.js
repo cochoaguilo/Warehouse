@@ -1,41 +1,28 @@
 const sequelize = require('../conexion');
 
 const getRegiones =  async (req, res) => {
-    /*const query = `SELECT c.id_ciudad, c.nombre nombre_ciudad, 
-                  p.nombre nombre_pais, r.nombre nombre_region
-                  FROM ciudades c
-                  LEFT JOIN paises p using(id_pais)
-                  LEFT JOIN regiones r using(id_region) `;*/
+    
     
     const queryRegion = 'SELECT * FROM regiones'
-    //const queryPaises = 'SELECT * FROM paises'
-    //const queryCiudades = 'SELECT * FROM ciudades'
+    
     try {
       const regiones = await sequelize.query(queryRegion, {type:sequelize.QueryTypes.SELECT});
-      
-      //const paises = await sequelize.query(queryPaises, {type:sequelize.QueryTypes.SELECT});
-     
-      //const ciudades = await sequelize.query(queryCiudades, {type:sequelize.QueryTypes.SELECT});
+    
       res.json(regiones);
-      /*const u = await sequelize.query(query, {type:sequelize.QueryTypes.SELECT});
-      res.json(u);*/
+      
     } catch(e) {
       console.log(e);
     }
   };
 
   const getAllTables = async(req,res) =>{
-    const query = `SELECT c.id_ciudad, c.nombre nombre_ciudad, 
-                  p.nombre nombre_pais, r.nombre nombre_region
-                  FROM ciudades c
-                  LEFT JOIN paises p using(id_pais)
-                  LEFT JOIN regiones r using(id_region) `;
     
+    const queryRegion = 'SELECT * FROM regiones'
                   
      try {
       
-      const u = await sequelize.query(query, {type:sequelize.QueryTypes.SELECT});
-      res.json(u);
+      const u = await sequelize.query(queryRegion, {type:sequelize.QueryTypes.SELECT});
+      
      } catch(e) {
       console.log(e);
       }
@@ -57,7 +44,7 @@ const newRegion =   async(req, res) => {
   };
 
 let deleteRegion = async (req,res)=>{
-    const id = req.query.id_region;
+    const id = req.params.id;
     const query = 'DELETE FROM regiones WHERE id_region= ?';
     try{
     await sequelize.query(query, {
@@ -70,7 +57,59 @@ let deleteRegion = async (req,res)=>{
       console.log(e)
     }
   };
+
+  function selectAllInfoLocation(req, res) {
+    let sql = `SELECT * FROM regiones`;
+
+    sequelize.query(sql, function (err, regiones) {
+        if (err) {
+            console.log(err)
+            res.status(500).json({ error: 'Internal error' });
+
+        } else {
+            regiones.forEach(re => {
+                re.type = "region"
+            })
+
+            let sqlCon = `SELECT * FROM paises`;
+
+            sequelize.query(sqlCon, function (err, paises) {
+                if (err) {
+                    console.log(err)
+                    res.status(500).json({ error: 'Internal error' });
+
+                } else {
+
+                    paises.forEach(co => {
+                        co.type = "pais"
+                        regiones.push(co)
+                    })
+
+                    let sqlCit = `SELECT * FROM ciudades`;
+
+                    sequelize.query(sqlCit, function (err, ciudades) {
+                        if (err) {
+                            console.log(err)
+                            res.status(500).json({ error: 'Internal error' });
+
+                        } else {
+
+                            ciudades.forEach(ci => {
+                                ci.type = "ciudad"
+                                regiones.push(ci)
+                            })
+                            res.send(regiones)
+
+                        }
+                    })
+                }
+            })
+
+        }
+    })
+}
 exports.getAllTables = getAllTables;
 exports.getRegiones = getRegiones;
 exports.newRegion = newRegion;
 exports.deleteRegion = deleteRegion;
+exports.selectAllInfoLocation =selectAllInfoLocation;

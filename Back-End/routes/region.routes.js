@@ -13,7 +13,7 @@ router.post('/',/* middleware.autentificarAdmin,middleware.autentificarUser*/ re
 
 //router.put('/:id', upload.single('nombre'), regionControllers.updateAlbum)
 
-router.delete('/:id',middleware.autentificarAdmin,middleware.autentificarUser, regionControllers.deleteRegion)
+router.delete('/:id',/*middleware.autentificarAdmin,middleware.autentificarUser*/ regionControllers.deleteRegion)
 
 
 module.exports = router

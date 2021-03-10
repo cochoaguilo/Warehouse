@@ -4,128 +4,79 @@ const endpointCiudades = "/ciudades";
 const container = document.getElementById("container");
 const jsTree = document.getElementById("jstree");
 
-apiFetchGET(endpointRegiones+'/all').then((data) => {
-    console.log(data);
-    fillAllTables(data);
-});  
-apiFetchGET(endpointRegiones).then((data) => {
-  console.log(data);
 
-  if (data.nombre) {
-    
-  }
-  fillRegion(data, "regiones");
-});
-/*apiFetchGET(endpointPaises).then((data) => {
-  console.log(data);
-  fillRegion(data, "paises");
-});
-apiFetchGET(endpointCiudades).then((data) => {
-  console.log(data);
-  fillRegion(data, "ciudades");
-});*/
-
-const fillAllTables = (list) => {
+apiFetchGET(endpointRegiones).then((dataRegiones) => {
   
 
-  list.forEach((region) => {
+  for (let index = 0; index < dataRegiones.length; index++) {
+    const element = dataRegiones[index].nombre;
     
-    // variables
-    const regiones = region.nombre_region,
-          paises = region.nombre_pais,
-          ciudades = region.nombre_ciudad;
-
-    //Regiones
+    //li
     let liRegiones = document.createElement("li");
+    liRegiones.id = element;
     container.appendChild(liRegiones);
-    liRegiones.textContent = regiones;
-    //Paises
+    liRegiones.innerText = element;
     
-    let ulPaises = document.createElement("ul"),
-          liPaises = document.createElement("li");
+    //ul
+    let ulPaises = document.createElement("ul");
     liRegiones.appendChild(ulPaises);
-    ulPaises.appendChild(liPaises);
-    liPaises.textContent = paises;
-
-    //Ciudades
-    let ulCiudades = document.createElement("ul"),
-        liCiudades = document.createElement("li");
-    liPaises.appendChild(ulCiudades);
-    ulCiudades.appendChild(liCiudades);
-    liCiudades.textContent = ciudades;
 
     //buttons
-    let btnPais = document.createElement("button"),
-      btnCiudad = document.createElement("button");
+    let btnPais = document.createElement("button");
     liRegiones.appendChild(btnPais);
     liRegiones.insertBefore(btnPais, ulPaises);
-    liPaises.appendChild(btnCiudad);
-    liPaises.insertBefore(btnCiudad, ulCiudades);
-
-    
 
     btnPais.classList.add("btn-pais");
-    btnCiudad.classList.add("btn-ciudad");
+
     btnPais.innerText = "Agregar Pais";
-    btnCiudad.innerText = "Agregar Ciudad";
-  });
-};
 
-const fillRegion = (list, nombreDato) => {
-  
+    apiFetchGET(
+      endpointPaises + `/region/${dataRegiones[index].id_region}`
+    ).then((dataPaises) => {
+      let paises = dataPaises.data;
+      for (let indexPais = 0; indexPais < paises.length; indexPais++) {
+        
+        //li
+        let liPaises = document.createElement("li");
+        liPaises.id = paises[indexPais].nombre;
+        ulPaises.appendChild(liPaises);
+        liPaises.innerText = paises[indexPais].nombre;
+        
+        //ul
+        let ulCiudades = document.createElement("ul");
+        liPaises.appendChild(ulCiudades);
 
-  list.forEach((dato) => {
-   
-    // variables
-    const dataBring = dato.nombre
-    //  paises = region.nombre_pais,
-      //ciudades = region.nombre_ciudad;
+        //buttons
+        let btnCiudad = document.createElement("button");
+        liPaises.appendChild(btnCiudad);
+        liPaises.insertBefore(btnCiudad, ulCiudades);
+        btnCiudad.classList.add("btn-ciudad");
+        btnCiudad.innerText = "Agregar Ciudad";
 
-    //Regiones
-    let liRegiones = document.createElement("li");
-    
-    //Paises
-    
-    let ulPaises = document.createElement("ul"),
-          liPaises = document.createElement("li");
+        apiFetchGET(
+          endpointCiudades + `/pais/${paises[indexPais].id_pais}`
+        ).then((dataCiudades) => {
+          let ciudades = dataCiudades.data;
 
-    //Ciudades
-    let ulCiudades = document.createElement("ul"),
-        liCiudades = document.createElement("li");
-    
+          for (
+            let indexCiudades = 0;
+            indexCiudades < ciudades.length;
+            indexCiudades++
+          ) {
+            let liCiudades = document.createElement("li");
+            liCiudades.id = ciudades[indexCiudades].nombre;
+            ulCiudades.appendChild(liCiudades);
+            liCiudades.innerText = ciudades[indexCiudades].nombre;
 
-    //buttons
-    let btnPais = document.createElement("button"),
-      btnCiudad = document.createElement("button");
-    /*liRegiones.appendChild(btnPais);
-    liRegiones.insertBefore(btnPais, ulPaises);
-    liPaises.appendChild(btnCiudad);
-    liPaises.insertBefore(btnCiudad, ulCiudades);*/
+            
+          }
+        });
+      }
+    });
+  }
+});
 
-    //condicional que asigna los nombres segun la tabla de sql
-    if (nombreDato == 'regiones') {
-      
-      liRegiones.innerText = dataBring;
-      container.appendChild(liRegiones);
-      liRegiones.appendChild(ulPaises);
-    }
-    if(nombreDato == 'paises'){
-      
-          liPaises.innerText = dataBring;
-          ulPaises.appendChild(liPaises);
-          liPaises.appendChild(ulCiudades);
-    }else{
-      liCiudades.innerText = dataBring;
-      
-      ulCiudades.appendChild(liCiudades);
-    }
 
-    btnPais.classList.add("btn-pais");
-    btnCiudad.classList.add("btn-ciudad");
-    btnPais.innerText = "Agregar Pais";
-    btnCiudad.innerText = "Agregar Ciudad";
-  });
-};
 
 
 

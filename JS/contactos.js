@@ -1,4 +1,7 @@
-let contactosEndpoint = '/contactos'
+let contactosEndpoint = '/contactos',
+    regionesEndpoint = '/regiones',
+    paisesEndpont = '/paises';
+
   $(window).ready( function () {
     
    
@@ -19,22 +22,25 @@ let contactosEndpoint = '/contactos'
             
         })
 let table = $('#container-table').DataTable();
-    let inpBox = document.createElement('input');
-    inpBox.type = 'checkbox';
-    let btnAcciones = document.createElement('button');
+    
+    
 
     apiFetchGET(contactosEndpoint).then(data=>{
      console.log(data)
      for (let index = 0; index < data.length; index++) {
+      let inpBox = document.createElement('input');
+      inpBox.setAttribute('type','checkbox');
+      let btnAcciones = document.createElement('button');
+      btnAcciones.innerText = '...';
          table.row.add([
-            inpBox,
+            inpBox.outerHTML,
             data[index].nombre +' '+ data[index].apellido,
             data[index].nombre_pais + "   "+data[index].nombre_region,
             data[index].nombre_compania,
             data[index].cargo,
             data[index].canal,
             data[index].valor,
-            btnAcciones
+            btnAcciones.outerHTML
              
              
           ]).draw(false);
@@ -45,7 +51,19 @@ let table = $('#container-table').DataTable();
 
 
 })
-    
+let selectRegion = document.getElementById('region');
+
+apiFetchGET(regionesEndpoint)
+.then(data =>{
+  for (let index = 0; index < data.length; index++) {
+    const element = data[index].nombre;
+
+    let option = document.createElement('option');
+    option.textContent = element;
+    selectRegion.insertBefore(option,selectRegion.lastChild);
+  }
+})
+
     
 $('#modal-guardar').click(function (e) { 
   e.preventDefault();

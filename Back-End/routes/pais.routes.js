@@ -9,7 +9,7 @@ router.get('/',/*middleware.autentificarAdmin, middleware.autentificarUser*/ pai
 
 router.post('/',/* middleware.autentificarAdmin,middleware.autentificarUser*/ paisControllers.newPais)
 
-//router.put('/:id', upload.single('nombre'), paisControllers.updateAlbum)
+router.get('/region/:id_region',  paisControllers.getPaisByRegionId)
 
 router.delete('/:id',middleware.autentificarAdmin,middleware.autentificarUser, paisControllers.deletePais)
 

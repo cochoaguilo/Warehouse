@@ -27,18 +27,52 @@ const newContacto =   async(req, res) => {
   
     try {
       console.log(req.body);
-      const {nombre,  apellido, correo, compania, } = req.body;
-      const queryCompania = `SELECT id_compania
-                              FROM compania
-                              WHERE nombre = ${compania}`;
+      const {nombre,  apellido, cargo, correo, compania,Region, Pais, Ciudad, Direccion,
+       Interes, Canal, Cuenta, Preferencias} = req.body;
+      const queryCompania = 
+      `SELECT id_compania                       
+      FROM compania
+      WHERE nombre = ${compania}`;
+
+      const queryRegion = 
+      `SELECT id_region                       
+      FROM region
+      WHERE nombre = ${Region}`;
+      
+      const queryPais = 
+      `SELECT id_pais                       
+      FROM paises
+      WHERE nombre = ${Pais}`;
+
+      const queryCiudad = 
+      `SELECT id_ciudad                       
+      FROM ciudades
+      WHERE nombre = ${Ciudad}`;
+
+      const queryInteres = 
+      `SELECT id_interes                       
+      FROM interes
+      WHERE nombre = ${Interes}`;
+
+      const queryCanal = 
+      `SELECT id_canal                       
+      FROM canal_Contacto
+      WHERE nombre = ${Canal}`;
+
+      const queryPreferencias = 
+      `SELECT id_preferencias                       
+      FROM preferencias
+      WHERE nombre_preferencias = ${Preferencias}`;
+
       const query = 
       `INSERT INTO contactos (nombre, id_compania,Cargo, id_canal, id_interes,id_ciudad, 
         apellido, correo, direccion, cuenta_usuario, id_preferncias) 
-      VALUES (?,?,?,?,?)`;
+      VALUES (?,$, ?, ?, ?,?,${queryPreferencias})`;
 
       sequelize.query(query, {
         replacements: [
-          nombre, apellido, correo, id_perfil, hashedPassword
+          nombre, queryCompania, cargo, queryCanal,queryInteres,
+          queryCiudad, apellido, correo, Direccion, Cuenta, queryPreferencias
         ]
       }).then((response)=>{
         res.send({mensaje: 'enviado', usuario: req.body});

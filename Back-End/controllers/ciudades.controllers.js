@@ -20,7 +20,20 @@ const getCiudades =  async (req, res) => {
       console.log(e);
     }
   };
+  const getCiudadByPaisId = async(req,res) =>{
+  
 
+    try{
+      const query = `SELECT * FROM ciudades WHERE id_pais =${req.params.id_pais}
+                      LIMIT 1`
+      await sequelize.query(query).then((response)=>{
+        //console.log(response);
+        res.send({data: response[0]})
+      })
+    }catch(e){
+      console.log(e);
+    }
+  }
 const newCiudad =   async(req, res) => {
     const query = 'INSERT INTO ciudades (nombre) VALUES (?)';
     try {
@@ -52,5 +65,6 @@ let deleteCiudad = async (req,res)=>{
   };
 
 exports.getCiudades = getCiudades;
+exports.getCiudadByPaisId = getCiudadByPaisId;
 exports.newCiudad = newCiudad;
 exports.deleteCiudad = deleteCiudad;

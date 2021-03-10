@@ -21,18 +21,15 @@ const regionRoutes = require('./routes/region.routes')
 const companiasRoutes = require('./routes/compañias.routes')
 const paisesRoutes = require('./routes/pais.routes')
 const ciudadesRoutes = require('./routes/ciudades.routes')
+const usuariosRoutes = require('./routes/usuarios.routes')
 
 app.use('/contactos',contactosRoutes);
 app.use('/regiones', regionRoutes);
 app.use('/companias',companiasRoutes);
 app.use('/paises', paisesRoutes);
 app.use('/ciudades', ciudadesRoutes);
+app.use('/usuarios', usuariosRoutes);
 
-
-
-
-
-  
 
 app.listen(port, () => {
     console.log(`Server listeting on port ${port}`);

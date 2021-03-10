@@ -9,7 +9,7 @@ router.get('/',/*middleware.autentificarAdmin, middleware.autentificarUser*/ ciu
 
 router.post('/',/* middleware.autentificarAdmin,middleware.autentificarUser*/ ciudadesControllers.newCiudad)
 
-//router.put('/:id', upload.single('nombre'), ciudadesControllers.updateAlbum)
+router.get('/pais/:id_pais',  ciudadesControllers.getCiudadByPaisId);
 
 router.delete('/:id',middleware.autentificarAdmin,middleware.autentificarUser, ciudadesControllers.deleteCiudad)
 

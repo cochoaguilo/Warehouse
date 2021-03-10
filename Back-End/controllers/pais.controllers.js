@@ -1,3 +1,4 @@
+const { response } = require('express');
 const sequelize = require('../conexion');
 
 const getPaises =  async (req, res) => {
@@ -23,7 +24,20 @@ const getPaises =  async (req, res) => {
       console.log(e);
     }
   };
+const getPaisByRegionId = async(req,res) =>{
+  
 
+  try{
+    const query = `SELECT * FROM paises WHERE id_region =${req.params.id_region}
+                    LIMIT 1`
+    await sequelize.query(query).then((response)=>{
+      //console.log(response);
+      res.send({data: response[0]})
+    })
+  }catch(e){
+    console.log(e);
+  }
+}
 const newPais =   async(req, res) => {
     const query = 'INSERT INTO paises (nombre) VALUES (?)';
     try {
@@ -40,7 +54,7 @@ const newPais =   async(req, res) => {
   };
 
 let deletePais = async (req,res)=>{
-    const id = req.query.id_region;
+    const id = req.params.id;
     const query = 'DELETE FROM paises WHERE id_pais= ?';
     try{
     await sequelize.query(query, {
@@ -55,5 +69,6 @@ let deletePais = async (req,res)=>{
   };
 
 exports.getPaises = getPaises;
+exports.getPaisByRegionId = getPaisByRegionId;
 exports.newPais = newPais;
 exports.deletePais = deletePais;

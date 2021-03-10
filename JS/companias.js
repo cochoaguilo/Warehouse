@@ -1,6 +1,7 @@
 let companiasEndpoint = '/companias';
 let container = document.getElementById('container');
 let btn = document.createElement('button');
+btn.innerText = '...';
 
 
 $(document).ready( function () {
@@ -16,7 +17,7 @@ $(document).ready( function () {
             data[index].correo,
             data[index].telefono,
             data[index].nombre_ciudad,
-            btn
+            btn.outerHTML
             
          ]).draw(false);
     }
