@@ -36,7 +36,7 @@ const newRegion =   async(req, res) => {
           req.body.nombre
         ]
       }).then((response)=>{
-        res.send({mensaje: 'enviado', usuario: req.body});
+        res.send({mensaje: 'enviado', region: req.body});
       })
     } catch(e) {
       console.log(e);

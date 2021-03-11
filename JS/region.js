@@ -4,10 +4,15 @@ const endpointCiudades = "/ciudades";
 const container = document.getElementById("container");
 const jsTree = document.getElementById("jstree");
 
+$(document).ready(function () {
+  
+
+
+
 
 apiFetchGET(endpointRegiones).then((dataRegiones) => {
   
-
+  
   for (let index = 0; index < dataRegiones.length; index++) {
     const element = dataRegiones[index].nombre;
     
@@ -16,29 +21,46 @@ apiFetchGET(endpointRegiones).then((dataRegiones) => {
     liRegiones.id = element;
     container.appendChild(liRegiones);
     liRegiones.innerText = element;
+    liRegiones.style.padding = "10px";
+    liRegiones.style.margin = "10px";
     
     //ul
     let ulPaises = document.createElement("ul");
     liRegiones.appendChild(ulPaises);
 
     //buttons
-    let btnPais = document.createElement("button");
-    liRegiones.appendChild(btnPais);
+    let btnPais = document.createElement("button"),
+        btnEdit = document.createElement("button"),
+        btnDelete = document.createElement("button");
+
+    
     liRegiones.insertBefore(btnPais, ulPaises);
+    liRegiones.insertBefore(btnEdit, btnPais);
+    liRegiones.insertBefore(btnDelete, btnPais);
 
     btnPais.classList.add("btn-pais");
+    btnEdit.className = "btn-edit";
+    btnDelete.className = "btn-delete";
 
     btnPais.innerText = "Agregar Pais";
+    btnEdit.innerText = "Edit";
+    btnDelete.innerText = "Delete";
+    btnPais.addEventListener('click', ()=>{
+      inputButtons(liRegiones,ulPaises, endpointPaises, dataRegiones[index].id_region)
+    })
 
     apiFetchGET(
       endpointPaises + `/region/${dataRegiones[index].id_region}`
     ).then((dataPaises) => {
       let paises = dataPaises.data;
+      console.log(paises);
       for (let indexPais = 0; indexPais < paises.length; indexPais++) {
         
         //li
         let liPaises = document.createElement("li");
         liPaises.id = paises[indexPais].nombre;
+        liPaises.style.padding = "10px";
+        liPaises.style.margin = "10px";
         ulPaises.appendChild(liPaises);
         liPaises.innerText = paises[indexPais].nombre;
         
@@ -48,10 +70,23 @@ apiFetchGET(endpointRegiones).then((dataRegiones) => {
 
         //buttons
         let btnCiudad = document.createElement("button");
-        liPaises.appendChild(btnCiudad);
         liPaises.insertBefore(btnCiudad, ulCiudades);
         btnCiudad.classList.add("btn-ciudad");
         btnCiudad.innerText = "Agregar Ciudad";
+
+        let btnEdit = document.createElement("button");
+        liPaises.insertBefore(btnEdit, btnCiudad)
+        btnEdit.innerText = "Edit";
+        btnEdit.className = "btn-edit";
+
+        let btnDelete = document.createElement("button");
+        liPaises.insertBefore(btnDelete, btnCiudad)
+        btnDelete.innerText = "Delete"
+        btnDelete.className = "btn-delete";
+
+        btnCiudad.addEventListener('click',()=>{
+          inputButtons(liPaises,ulCiudades, endpointCiudades, )
+        })
 
         apiFetchGET(
           endpointCiudades + `/pais/${paises[indexPais].id_pais}`
@@ -65,10 +100,20 @@ apiFetchGET(endpointRegiones).then((dataRegiones) => {
           ) {
             let liCiudades = document.createElement("li");
             liCiudades.id = ciudades[indexCiudades].nombre;
+            liCiudades.style.padding = "10px";
+            liCiudades.style.margin = "10px";
             ulCiudades.appendChild(liCiudades);
             liCiudades.innerText = ciudades[indexCiudades].nombre;
 
+            let btnEdit = document.createElement("button");
+            liCiudades.appendChild(btnEdit);
+            btnEdit.innerText = "Edit";
+            btnEdit.className = "btn-edit";
             
+            let btnDelete = document.createElement("button");
+            liCiudades.appendChild(btnDelete);
+            btnDelete.innerText = "Delete";
+            btnDelete.className = "btn-delete";
           }
         });
       }
@@ -82,26 +127,37 @@ apiFetchGET(endpointRegiones).then((dataRegiones) => {
 
 $("#ag-reg").click(function (e) {
   e.preventDefault();
+  inputButtons(jsTree, container, endpointRegiones)
+  
+  
+});
+
+function inputButtons(container, container2, endpoint, idRegion,idPais) {
   let inputTXT = document.createElement("input"),
     inputBTN = document.createElement("button");
-  jsTree.appendChild(inputTXT);
-  jsTree.insertBefore(inputTXT, container);
-  jsTree.insertBefore(inputBTN, container);
-  inputTXT.id = "input-region";
+  container.appendChild(inputTXT);
+  container.insertBefore(inputTXT, container2);
+  container.insertBefore(inputBTN, container2);
+  //inputTXT.id = "input-region";
   inputTXT.type = "text";
-  inputBTN.id = "submit-btn";
+  inputBTN.className = "submit-btn";
   inputBTN.type = "submit";
   inputBTN.innerText = "agregar";
   $(inputBTN).click(function () {
     let body = {
       nombre: inputTXT.value,
+      id_region: idRegion,
+      id_pais: idPais,
+
     };
     console.log(body);
-    apiFetchPOST(endpointRegiones, body).then((data) => {
+    apiFetchPOST(endpoint, body).then((data) => {
       console.log("Nice");
     });
   });
-});
+}
+
+
 
 /*$('#submit-btn').click(function (e) { 
   e.preventDefault();
@@ -111,3 +167,15 @@ $("#ag-reg").click(function (e) {
   
   //apiFetchPOST(endpointRegiones, inputValue, 'POST')
 });*/
+});
+//$('#jstree').jstree();
+    
+      $('#jstree').on("changed.jstree", function (e, data) {
+          //console.log(data.selected);
+      });
+        
+        $('.caret').on('changed.jstree', function(){
+           $('#jstree').jstree(true).select_node('ul');
+            
+        })
+

@@ -28,25 +28,26 @@ const getPaisByRegionId = async(req,res) =>{
   
 
   try{
-    const query = `SELECT * FROM paises WHERE id_region =${req.params.id_region}
-                    LIMIT 1`
-    await sequelize.query(query).then((response)=>{
-      //console.log(response);
-      res.send({data: response[0]})
-    })
+    const query = `SELECT * FROM paises 
+    WHERE id_region =${req.params.id_region}`
+    let queryPais = await sequelize.query(query, {type:sequelize.QueryTypes.SELECT})
+    res.send({data: queryPais})
   }catch(e){
     console.log(e);
   }
 }
 const newPais =   async(req, res) => {
-    const query = 'INSERT INTO paises (nombre) VALUES (?)';
+    
+    const query = 'INSERT INTO paises (nombre, id_region, id_pais) VALUES (?,?,?)';
     try {
      await sequelize.query(query, {
         replacements: [
-          req.body.nombre
+          req.body.nombre,
+          req.body.id_region,
+          req.body.id_pais
         ]
       }).then((response)=>{
-        res.send({mensaje: 'enviado', usuario: req.body});
+        res.send({mensaje: 'enviado', pais: req.body});
       })
     } catch(e) {
       console.log(e);
