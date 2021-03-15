@@ -15,18 +15,6 @@ const getRegiones =  async (req, res) => {
     }
   };
 
-  const getAllTables = async(req,res) =>{
-    
-    const queryRegion = 'SELECT * FROM regiones'
-                  
-     try {
-      
-      const u = await sequelize.query(queryRegion, {type:sequelize.QueryTypes.SELECT});
-      
-     } catch(e) {
-      console.log(e);
-      }
-  }
 
 const newRegion =   async(req, res) => {
     const query = 'INSERT INTO regiones (nombre) VALUES (?)';
@@ -43,7 +31,7 @@ const newRegion =   async(req, res) => {
     }
   };
 
-let deleteRegion = async (req,res)=>{
+const deleteRegion = async (req,res)=>{
     const id = req.params.id;
     const query = 'DELETE FROM regiones WHERE id_region= ?';
     try{
@@ -58,58 +46,30 @@ let deleteRegion = async (req,res)=>{
     }
   };
 
-  function selectAllInfoLocation(req, res) {
-    let sql = `SELECT * FROM regiones`;
+const updateRegion = async (req, res) =>{
+  
 
-    sequelize.query(sql, function (err, regiones) {
-        if (err) {
-            console.log(err)
-            res.status(500).json({ error: 'Internal error' });
+    try {
+        await sequelize.query(`UPDATE regiones 
+        SET nombre = "${req.body.nombre}"  
+        WHERE id_region = ${req.params.id}`,
+        { type: sequelize.QueryTypes.INSERT })
+        .then((data =>{
 
-        } else {
-            regiones.forEach(re => {
-                re.type = "region"
-            })
+          res.status(201).json({
+            message: 'pedido actualizado',
+            data:req.body
+        })
+        })
+        
+        )
 
-            let sqlCon = `SELECT * FROM paises`;
+    } catch (error) {
+        console.log(`error en la inserción ${error}`)
+    }
+}  
 
-            sequelize.query(sqlCon, function (err, paises) {
-                if (err) {
-                    console.log(err)
-                    res.status(500).json({ error: 'Internal error' });
-
-                } else {
-
-                    paises.forEach(co => {
-                        co.type = "pais"
-                        regiones.push(co)
-                    })
-
-                    let sqlCit = `SELECT * FROM ciudades`;
-
-                    sequelize.query(sqlCit, function (err, ciudades) {
-                        if (err) {
-                            console.log(err)
-                            res.status(500).json({ error: 'Internal error' });
-
-                        } else {
-
-                            ciudades.forEach(ci => {
-                                ci.type = "ciudad"
-                                regiones.push(ci)
-                            })
-                            res.send(regiones)
-
-                        }
-                    })
-                }
-            })
-
-        }
-    })
-}
-exports.getAllTables = getAllTables;
 exports.getRegiones = getRegiones;
 exports.newRegion = newRegion;
 exports.deleteRegion = deleteRegion;
-exports.selectAllInfoLocation =selectAllInfoLocation;
+exports.updateRegion = updateRegion;

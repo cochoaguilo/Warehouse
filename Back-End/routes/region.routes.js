@@ -7,11 +7,9 @@ const middleware = require('../middleware')
 
 router.get('/',/*middleware.autentificarAdmin, middleware.autentificarUser*/ regionControllers.getRegiones)
 
-router.get('/all',/*middleware.autentificarAdmin, middleware.autentificarUser*/ regionControllers.getAllTables)
-
 router.post('/',/* middleware.autentificarAdmin,middleware.autentificarUser*/ regionControllers.newRegion)
 
-//router.put('/:id', upload.single('nombre'), regionControllers.updateAlbum)
+router.put('/:id', /* middleware.autentificarAdmin,middleware.autentificarUser*/regionControllers.updateRegion)
 
 router.delete('/:id',/*middleware.autentificarAdmin,middleware.autentificarUser*/ regionControllers.deleteRegion)
 

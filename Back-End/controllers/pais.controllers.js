@@ -54,7 +54,7 @@ const newPais =   async(req, res) => {
     }
   };
 
-let deletePais = async (req,res)=>{
+const deletePais = async (req,res)=>{
     const id = req.params.id;
     const query = 'DELETE FROM paises WHERE id_pais= ?';
     try{
@@ -69,7 +69,31 @@ let deletePais = async (req,res)=>{
     }
   };
 
+  const updatePais = async (req, res) =>{
+  
+
+    try {
+        await sequelize.query(`UPDATE paises 
+        SET nombre = "${req.body.nombre}"  
+        WHERE id_pais = ${req.params.id}`,
+        { type: sequelize.QueryTypes.INSERT })
+        .then((data =>{
+
+          res.status(201).json({
+            message: 'pedido actualizado',
+            data:req.body
+        })
+        })
+        
+        )
+
+    } catch (error) {
+        console.log(`error en la inserción ${error}`)
+    }
+} 
+
 exports.getPaises = getPaises;
 exports.getPaisByRegionId = getPaisByRegionId;
 exports.newPais = newPais;
 exports.deletePais = deletePais;
+exports.updatePais = updatePais;

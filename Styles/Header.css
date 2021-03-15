@@ -1,3 +1,4 @@
+@charset "UTF-8";
 body {
   margin: 0;
   padding: 0;
@@ -6,39 +7,28 @@ body {
 
 header {
   background-color: #1d72c2;
-  display: -ms-grid;
   display: grid;
   grid-row: 1fr 5fr 2fr;
 }
-
 header ul {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  flex-direction: row;
   float: right;
 }
-
 header ul li {
   text-decoration: none;
   list-style: none;
   margin: 0 20px;
   float: right;
 }
-
 header ul li a {
   text-decoration: none;
   color: white;
 }
-
 header ul li #contactos {
   -webkit-text-decoration: 2px underline 5px;
           text-decoration: 2px underline 5px;
 }
-
 header ul li #contactos::after {
   content: "";
   width: 100%;
@@ -49,18 +39,13 @@ header ul li #contactos::after {
 }
 
 #section1 {
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 4fr 1fr 1fr 2fr;
-      grid-template-columns: 4fr 1fr 1fr 2fr;
-  -ms-grid-rows: 1fr 2fr;
-      grid-template-rows: 1fr 2fr;
+  grid-template-columns: 4fr 1fr 1fr 2fr;
+  grid-template-rows: 1fr 2fr;
 }
-
 #section1 h1 {
   margin-left: 30px;
 }
-
 #section1 #btn-search {
   position: relative;
   width: 20%;
@@ -72,18 +57,15 @@ header ul li #contactos::after {
   border-radius: 4px;
   cursor: pointer;
 }
-
 #section1 #jstree {
   position: absolute;
   left: 2.5%;
   top: 20vh;
   z-index: 4;
-  -ms-grid-column: 1;
   grid-column: 1/1;
   background-color: white;
   border: 1px solid #ddd;
 }
-
 #section1 #jstree .caret {
   cursor: pointer;
   -webkit-user-select: none;
@@ -97,69 +79,50 @@ header ul li #contactos::after {
   right: 5%;
   bottom: 30px;
 }
-
 #section1 #jstree .caret::before {
-  content: "\25B6";
+  content: "▶";
   color: black;
   display: inline-block;
   margin-right: 6px;
 }
-
 #section1 #jstree .caret-down::before {
   /* IE 9 */
-  -webkit-transform: rotate(90deg);
   /* Safari */
   transform: rotate(90deg);
 }
-
 #section1 #jstree a {
   text-decoration: none;
   color: black;
 }
-
 #section1 #jstree li {
   list-style: none;
   margin: 20px 0px;
 }
-
 #section1 #jstree input {
-  -ms-flex-line-pack: center;
-      align-content: center;
+  align-content: center;
 }
-
 #section1 #jstree .input-jstree {
   position: relative;
   left: 30%;
-  -ms-flex-line-pack: center;
-      align-content: center;
+  align-content: center;
   width: 20%;
 }
-
 #section1 #contactos {
   position: relative;
   bottom: 40px;
   width: 80%;
   height: 50px;
 }
-
 #section1 .buttons {
-  -ms-grid-column: 4;
   grid-column: 4/4;
-  -ms-grid-row: 2;
   grid-row: 2/2;
   position: relative;
   top: 40px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  flex-direction: row;
   gap: 10px;
   right: 25px;
 }
-
 #section1 .buttons button, #section1 .buttons input {
   border-color: #1d72c2;
   background-color: white;
@@ -170,18 +133,15 @@ header ul li #contactos::after {
   font-size: 16px;
   cursor: pointer;
 }
-
 #section1 .buttons button:hover, #section1 .buttons input:hover {
   background-color: #1d72c2;
   border-color: white;
   color: white;
 }
-
 #section1 .buttons input {
   width: 50%;
   cursor: pointer;
 }
-
 #section1 .buttons #upload {
   position: relative;
   width: 12.5%;
@@ -224,5 +184,4 @@ header ul li #contactos::after {
       }
     }
   }
-}*/
-/*# sourceMappingURL=Header.css.map */
+}*//*# sourceMappingURL=Header.css.map */

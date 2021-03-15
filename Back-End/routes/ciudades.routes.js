@@ -11,7 +11,9 @@ router.post('/',/* middleware.autentificarAdmin,middleware.autentificarUser*/ ci
 
 router.get('/pais/:id_pais',  ciudadesControllers.getCiudadByPaisId);
 
-router.delete('/:id',middleware.autentificarAdmin,middleware.autentificarUser, ciudadesControllers.deleteCiudad)
+router.put('/:id',/*middleware.autentificarAdmin,middleware.autentificarUser, */ ciudadesControllers.updateCiudad)
+
+router.delete('/:id',/*middleware.autentificarAdmin,middleware.autentificarUser, */ ciudadesControllers.deleteCiudad)
 
 
 module.exports = router

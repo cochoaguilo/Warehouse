@@ -24,22 +24,21 @@ const getCiudades =  async (req, res) => {
   
 
     try{
-      const query = `SELECT * FROM ciudades WHERE id_pais =${req.params.id_pais}
-                      LIMIT 1`
-      await sequelize.query(query).then((response)=>{
-        //console.log(response);
-        res.send({data: response[0]})
-      })
+      const query = `SELECT * FROM ciudades WHERE id_pais =${req.params.id_pais}`
+      let queryCiudad = await sequelize.query(query,
+        {type:sequelize.QueryTypes.SELECT})
+      res.send({data: queryCiudad})
     }catch(e){
       console.log(e);
     }
   }
 const newCiudad =   async(req, res) => {
-    const query = 'INSERT INTO ciudades (nombre) VALUES (?)';
+    const query = 'INSERT INTO ciudades (nombre, id_pais) VALUES (?, ?)';
     try {
      await sequelize.query(query, {
         replacements: [
-          req.body.nombre
+          req.body.nombre,
+          req.body.id_pais
         ]
       }).then((response)=>{
         res.send({mensaje: 'enviado', usuario: req.body});
@@ -49,8 +48,8 @@ const newCiudad =   async(req, res) => {
     }
   };
 
-let deleteCiudad = async (req,res)=>{
-    const id = req.query.id_region;
+const deleteCiudad = async (req,res)=>{
+    const id = req.params.id;
     const query = 'DELETE FROM ciudades WHERE id_ciudad= ?';
     try{
     await sequelize.query(query, {
@@ -64,7 +63,29 @@ let deleteCiudad = async (req,res)=>{
     }
   };
 
+const updateCiudad = async(req, res) =>{
+  try {
+    await sequelize.query(`UPDATE ciudades 
+    SET nombre = "${req.body.nombre}"  
+    WHERE id_ciudad = ${req.params.id}`,
+    { type: sequelize.QueryTypes.INSERT })
+    .then((data =>{
+
+      res.status(201).json({
+        message: 'pedido actualizado',
+        data:req.body
+    })
+    })
+    
+    )
+
+} catch (error) {
+    console.log(`error en la inserción ${error}`)
+}
+}
+
 exports.getCiudades = getCiudades;
 exports.getCiudadByPaisId = getCiudadByPaisId;
 exports.newCiudad = newCiudad;
 exports.deleteCiudad = deleteCiudad;
+exports.updateCiudad = updateCiudad;

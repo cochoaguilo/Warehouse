@@ -11,7 +11,9 @@ router.post('/',/* middleware.autentificarAdmin,middleware.autentificarUser*/ pa
 
 router.get('/region/:id_region',  paisControllers.getPaisByRegionId)
 
-router.delete('/:id',middleware.autentificarAdmin,middleware.autentificarUser, paisControllers.deletePais)
+router.put('/:id',/*middleware.autentificarAdmin,middleware.autentificarUser, */paisControllers.updatePais)
+
+router.delete('/:id',/*middleware.autentificarAdmin,middleware.autentificarUser, */paisControllers.deletePais)
 
 
 module.exports = router

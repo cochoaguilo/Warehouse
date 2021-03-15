@@ -15,7 +15,7 @@ apiFetchGET(endpointRegiones).then((dataRegiones) => {
   
   for (let index = 0; index < dataRegiones.length; index++) {
     const element = dataRegiones[index].nombre;
-    
+    const indiceRegiones = dataRegiones[index].id_region
     //li
     let liRegiones = document.createElement("li");
     liRegiones.id = element;
@@ -29,25 +29,19 @@ apiFetchGET(endpointRegiones).then((dataRegiones) => {
     liRegiones.appendChild(ulPaises);
 
     //buttons
-    let btnPais = document.createElement("button"),
-        btnEdit = document.createElement("button"),
-        btnDelete = document.createElement("button");
-
-    
+    let btnPais = document.createElement("button");
     liRegiones.insertBefore(btnPais, ulPaises);
-    liRegiones.insertBefore(btnEdit, btnPais);
-    liRegiones.insertBefore(btnDelete, btnPais);
-
+    
     btnPais.classList.add("btn-pais");
-    btnEdit.className = "btn-edit";
-    btnDelete.className = "btn-delete";
-
     btnPais.innerText = "Agregar Pais";
-    btnEdit.innerText = "Edit";
-    btnDelete.innerText = "Delete";
+    
     btnPais.addEventListener('click', ()=>{
-      inputButtons(liRegiones,ulPaises, endpointPaises, dataRegiones[index].id_region)
+      inputButtons(liRegiones,ulPaises, endpointPaises, indiceRegiones)
     })
+
+    editDeleteBtns(liRegiones,btnPais,indiceRegiones, endpointRegiones)
+
+    //proximo fetch paises
 
     apiFetchGET(
       endpointPaises + `/region/${dataRegiones[index].id_region}`
@@ -55,14 +49,17 @@ apiFetchGET(endpointRegiones).then((dataRegiones) => {
       let paises = dataPaises.data;
       console.log(paises);
       for (let indexPais = 0; indexPais < paises.length; indexPais++) {
+
+        const nombre = paises[indexPais].nombre;
+        const indicePaises = paises[indexPais].id_pais;
         
         //li
         let liPaises = document.createElement("li");
-        liPaises.id = paises[indexPais].nombre;
+        liPaises.id = nombre
         liPaises.style.padding = "10px";
         liPaises.style.margin = "10px";
         ulPaises.appendChild(liPaises);
-        liPaises.innerText = paises[indexPais].nombre;
+        liPaises.innerText = nombre;
         
         //ul
         let ulCiudades = document.createElement("ul");
@@ -73,26 +70,21 @@ apiFetchGET(endpointRegiones).then((dataRegiones) => {
         liPaises.insertBefore(btnCiudad, ulCiudades);
         btnCiudad.classList.add("btn-ciudad");
         btnCiudad.innerText = "Agregar Ciudad";
-
-        let btnEdit = document.createElement("button");
-        liPaises.insertBefore(btnEdit, btnCiudad)
-        btnEdit.innerText = "Edit";
-        btnEdit.className = "btn-edit";
-
-        let btnDelete = document.createElement("button");
-        liPaises.insertBefore(btnDelete, btnCiudad)
-        btnDelete.innerText = "Delete"
-        btnDelete.className = "btn-delete";
+        editDeleteBtns(liPaises,btnCiudad,indicePaises, endpointPaises)
+      
 
         btnCiudad.addEventListener('click',()=>{
-          inputButtons(liPaises,ulCiudades, endpointCiudades, )
+          inputButtons(liPaises,ulCiudades, endpointCiudades,undefined, paises[indexPais].id_pais )
         })
+
+
+        //proximo fetch ciudades
 
         apiFetchGET(
           endpointCiudades + `/pais/${paises[indexPais].id_pais}`
         ).then((dataCiudades) => {
           let ciudades = dataCiudades.data;
-
+          console.log(ciudades);
           for (
             let indexCiudades = 0;
             indexCiudades < ciudades.length;
@@ -114,10 +106,19 @@ apiFetchGET(endpointRegiones).then((dataRegiones) => {
             liCiudades.appendChild(btnDelete);
             btnDelete.innerText = "Delete";
             btnDelete.className = "btn-delete";
+
+            btnDelete.addEventListener('click', ()=>{
+              apiFetchDELETE(endpointCiudades+`/${ciudades[indexCiudades].id_ciudad}`)
+              .then(
+                
+                window.location.reload()
+              )
+            })
           }
         });
       }
     });
+
   }
 });
 
@@ -132,17 +133,20 @@ $("#ag-reg").click(function (e) {
   
 });
 
+// 2 funciones que tratan los botones de delete y edit ademas de los inputs
+
 function inputButtons(container, container2, endpoint, idRegion,idPais) {
   let inputTXT = document.createElement("input"),
-    inputBTN = document.createElement("button");
-  container.appendChild(inputTXT);
+    inputBTN = document.createElement("button"),
+    closeBtn = document.createElement("button");
   container.insertBefore(inputTXT, container2);
   container.insertBefore(inputBTN, container2);
-  //inputTXT.id = "input-region";
+  container.insertBefore(closeBtn, container2);
   inputTXT.type = "text";
   inputBTN.className = "submit-btn";
   inputBTN.type = "submit";
   inputBTN.innerText = "agregar";
+  closeBtn.innerText = "X";
   $(inputBTN).click(function () {
     let body = {
       nombre: inputTXT.value,
@@ -152,30 +156,52 @@ function inputButtons(container, container2, endpoint, idRegion,idPais) {
     };
     console.log(body);
     apiFetchPOST(endpoint, body).then((data) => {
+      window.location.reload();
       console.log("Nice");
     });
   });
+
+  $(closeBtn).click(function (e) { 
+    e.preventDefault();
+
+    inputBTN.remove();
+    inputTXT.remove();
+    this.remove()
+  });
 }
 
+function editDeleteBtns(container, btn, indice, endpoint) {
+  let btnEdit = document.createElement("button");
+  container.insertBefore(btnEdit, btn)
+  btnEdit.innerText = "Edit";
+  btnEdit.className = "btn-edit";
 
+  let btnDelete = document.createElement("button");
+  container.insertBefore(btnDelete,btn )
+  btnDelete.innerText = "Delete"
+  btnDelete.className = "btn-delete";
 
-/*$('#submit-btn').click(function (e) { 
-  e.preventDefault();
-  console.log('hola');
-  
-  //let inputValue = document.getElementById('input-region')[0].value;
-  
-  //apiFetchPOST(endpointRegiones, inputValue, 'POST')
-});*/
+  btnDelete.addEventListener('click',()=>{
+    apiFetchDELETE(endpoint+`/${indice}`)
+    .then(
+      window.location.reload()
+    )
+  })
+
+  btnEdit.addEventListener('click', ()=>{
+   let nombre =  prompt('Cambia el nombre:')
+   console.log(nombre);
+   let body = {
+     nombre:nombre
+   }
+   apiFetchUPDATE(endpoint+`/${indice}`, body)
+   .then(
+     window.location.reload()
+   )
+  })
+
+}
+
 });
-//$('#jstree').jstree();
-    
-      $('#jstree').on("changed.jstree", function (e, data) {
-          //console.log(data.selected);
-      });
-        
-        $('.caret').on('changed.jstree', function(){
-           $('#jstree').jstree(true).select_node('ul');
-            
-        })
+
 
