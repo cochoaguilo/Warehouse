@@ -7,9 +7,9 @@ router.get('/',/*middleware.autentificarAdmin, middleware.autentificarUser,*/ co
 
 router.post('/', /*middleware.autentificarAdmin,middleware.autentificarUser,*/ companiasControllers.newCompania)
 
-//router.put('/:id', upload.single('nombre'), companiasControllers.updateAlbum)
+router.put('/:id', companiasControllers.updateCompania);
 
-router.delete('/:id',middleware.autentificarAdmin,middleware.autentificarUser, companiasControllers.deleteCompania)
+router.delete('/:id',/*middleware.autentificarAdmin,middleware.autentificarUser,*/ companiasControllers.deleteCompania)
 
 
 module.exports = router

@@ -27,22 +27,13 @@ const newContacto =   async(req, res) => {
   
     try {
       console.log(req.body);
-      const {nombre,  apellido, cargo, correo, compania,Region, Pais, Ciudad, Direccion,
+      const {nombre,  apellido, cargo, correo, compania, Ciudad, Direccion,
        Interes, Canal, Cuenta, Preferencias} = req.body;
       const queryCompania = 
       `SELECT id_compania                       
       FROM compania
       WHERE nombre = ${compania}`;
 
-      const queryRegion = 
-      `SELECT id_region                       
-      FROM region
-      WHERE nombre = ${Region}`;
-      
-      const queryPais = 
-      `SELECT id_pais                       
-      FROM paises
-      WHERE nombre = ${Pais}`;
 
       const queryCiudad = 
       `SELECT id_ciudad                       
@@ -67,7 +58,7 @@ const newContacto =   async(req, res) => {
       const query = 
       `INSERT INTO contactos (nombre, id_compania,Cargo, id_canal, id_interes,id_ciudad, 
         apellido, correo, direccion, cuenta_usuario, id_preferncias) 
-      VALUES (?,$, ?, ?, ?,?,${queryPreferencias})`;
+      VALUES (?,?,?,?,?,?,?,?,?,?,?)`;
 
       sequelize.query(query, {
         replacements: [

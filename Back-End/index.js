@@ -22,6 +22,7 @@ const companiasRoutes = require('./routes/compañias.routes')
 const paisesRoutes = require('./routes/pais.routes')
 const ciudadesRoutes = require('./routes/ciudades.routes')
 const usuariosRoutes = require('./routes/usuarios.routes')
+const configRoutes = require('./routes/configuraciones.routes')
 
 app.use('/contactos',contactosRoutes);
 app.use('/regiones', regionRoutes);
@@ -29,6 +30,7 @@ app.use('/companias',companiasRoutes);
 app.use('/paises', paisesRoutes);
 app.use('/ciudades', ciudadesRoutes);
 app.use('/usuarios', usuariosRoutes);
+app.use('/configuraciones', configRoutes)
 
 
 app.listen(port, () => {

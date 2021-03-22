@@ -1,28 +1,43 @@
 let companiasEndpoint = '/companias';
 let container = document.getElementById('container');
-var editor;
+let arrayCompanias = []
+let h3 = document.getElementById('h3')
 
 
-$(document).ready( function () {
 
     
    let table = $('#container').DataTable({
-   
-    
+
+    /*dom: 'lBfrtip',
+    buttons: [
+        'pageLength','copy', 'csv', 'excel'
+    ]*/
 });
 
-new $.fn.dataTable.Buttons( table, {
-    buttons: [
-        'copy', 'excel', 'pdf'
-    ]
-} );
+
    apiFetchGET(companiasEndpoint).then(data=>{
     console.log(data)
     for (let index = 0; index < data.length; index++) {
+        let divButtons = document.createElement('div')
         let btn = document.createElement('button');
-        btn.innerText = '...';
+        btn.className = 'btn-edit';
+        let i = document.createElement('i');
+        i.className = 'fa fa-edit';
+        btn.appendChild(i);
 
-        table.buttons().container()
+        let btnDelete = document.createElement('button');
+        btnDelete.className = 'btn-delete';
+        let iDelete = document.createElement('i');
+        iDelete.className = 'fa fa-trash';
+        btnDelete.appendChild(iDelete);
+
+        divButtons.appendChild(btn)
+        divButtons.appendChild(btnDelete)
+
+        arrayCompanias.push({
+            nombre:data[index].nombre,
+            id:data[index].id_compania
+        })
     
         table.row.add([
             data[index].nombre,
@@ -31,60 +46,22 @@ new $.fn.dataTable.Buttons( table, {
             data[index].correo,
             data[index].telefono,
             data[index].nombre_ciudad,
-            btn.outerHTML,
+            divButtons.outerHTML,
             
     
             
          ]).draw(false);
          
         
-        
-        table.on( 'buttons-action',function (e) { 
-            e.preventDefault();
-            console.log('hola');
-        });
-        
     }
-    table.on( 'selectItems', function ( e, dt, items ) {
-        console.log( 'Items to be selected are now: ', items );
-    } );
+    
 })
    .catch(e=>console.log(e));
    
   
-} );
 
-const nombre = document.getElementById("nombre"),
-            ciudad = document.getElementById("ciudad"),
-            correo = document.getElementById("correo"),
-            telefono = document.getElementById("Telefono"),
-            direccion = document.getElementById("direccion")
-   $('#compania-form').submit(function (e) { 
-       e.preventDefault();
-       
 
-        let bodyPOSTCompanias = {
-            nombre: nombre.value,
-            direccion: direccion.value,
-            correo: correo.value,
-            telefono: telefono.value,
-            ciudad: ciudad.value
-        }
-        
-        apiFetchPOST(companiasEndpoint, bodyPOSTCompanias)
-        .then(data => {console.log(data)
-    
-        }
-        );
-            
-   });
-$('#ag-compania').click(function (e) { 
-    e.preventDefault();
-    $('#myModal').css('display', 'block');
-});
 
-$('#close-modal').click(function (e) { 
-    e.preventDefault();
-    $('#myModal').css('display', 'none');
-});
+   
+console.log(arrayCompanias);
 

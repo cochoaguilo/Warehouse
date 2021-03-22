@@ -2,7 +2,7 @@ const sequelize = require('../conexion');
 
 
 const getCompanias =  async (req, res) => {
-    const query = `SELECT c.nombre, c.telefono , c.correo , c.direccion , 
+    const query = `SELECT c.id_compania, c.nombre, c.telefono , c.correo , c.direccion , 
     p.nombre nombre_pais, c3.nombre nombre_ciudad 
     FROM compania c
     left join ciudades c3 using (id_ciudad)
@@ -28,8 +28,7 @@ const newCompania =   async(req, res) => {
 
     let Ciudad = await sequelize.query(queryCiudad, {type:sequelize.QueryTypes.SELECT});
     
-      
-    console.log(Ciudad[0].id_ciudad);
+    //console.log(Ciudad);
     
      //let Ciudad = queryCiudad.indexOf(ciudad);
      
@@ -50,11 +49,45 @@ const newCompania =   async(req, res) => {
       console.log(e);
     }
 }
-let deleteCompania = async (req,res)=>{
-    const id = req.query.id_contacto;
+
+const updateCompania = async (req, res) =>{
+  
+  
+  try {
+
+    const {nombre, direccion, correo, telefono, ciudad} = req.body;
+  const queryCiudad =  `SELECT id_ciudad
+    FROM ciudades
+    WHERE nombre = '${ciudad}'`;
+    let Ciudad = await sequelize.query(queryCiudad, {type:sequelize.QueryTypes.SELECT});
+
+      await sequelize.query(`UPDATE compania 
+      SET nombre = "${nombre}",
+          direccion = "${direccion}",
+          correo = "${correo}",
+          telefono = "${telefono}",
+          id_ciudad = "${Ciudad[0].id_ciudad}"
+      WHERE id_compania = ${req.params.id}`,
+      { type: sequelize.QueryTypes.INSERT })
+      .then((data =>{
+
+        res.status(201).json({
+          message: 'pedido actualizado',
+          data:req.body
+      })
+      })
+      
+      )
+
+  } catch (error) {
+      console.log(`error en la inserción ${error}`)
+  }
+}  
+const deleteCompania = async (req,res)=>{
+    const id = req.params.id;
     const query = 'DELETE FROM compania WHERE id_compania= ?';
     try{
-    sequelize.query(query, {
+    await sequelize.query(query, {
       replacements:[id]
     }).then((data => {
       res.send({status: 'eliminado'});
@@ -68,4 +101,5 @@ let deleteCompania = async (req,res)=>{
 
 exports.getCompanias = getCompanias;
 exports.newCompania = newCompania;
+exports.updateCompania = updateCompania;
 exports.deleteCompania = deleteCompania;
