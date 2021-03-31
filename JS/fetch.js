@@ -1,10 +1,20 @@
 
 const baseURL = `http://localhost:4500`;
 
+let token = sessionStorage.getItem('token');
+
 
 const apiFetchGET = async (endpoint) => {
   try {
-      let response = await fetch(baseURL+endpoint);
+      
+      let response = await fetch(baseURL+endpoint, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'authorization': 'Bearer '+ token
+          }
+      });
       response = await response.json();
       return response;
   } catch (e) {
@@ -21,7 +31,8 @@ const apiFetchPOST = async (endpoint, bodyFETCH) => {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'authorization': 'Bearer '+ token
             },
             body: JSON.stringify(bodyFETCH)
         });
@@ -39,7 +50,8 @@ const apiFetchDELETE = async (endpoint) => {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'authorization': 'Bearer '+ token
             },
             
         });
@@ -57,7 +69,8 @@ const apiFetchUPDATE = async (endpoint, body) => {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'authorization': 'Bearer '+ token
             },
 
             body: JSON.stringify(body)

@@ -6,9 +6,9 @@ const usuariosControllers = require('../controllers/usuarios.controllers');
 const middleware = require('../middleware')
 
 
-router.post('/',/* middleware.autentificarAdmin,middleware.autentificarUser*/ usuariosControllers.newUsuario)
+router.post('/', middleware.autentificarAdmin, usuariosControllers.newUsuario)
 
-router.post('/login',/*middleware.autentificarAdmin,middleware.autentificarUser*/ usuariosControllers.loginUsuario)
+router.post('/login', usuariosControllers.loginUsuario)
 
 
 module.exports = router

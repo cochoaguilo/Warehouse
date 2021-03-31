@@ -1,4 +1,3 @@
-@charset "UTF-8";
 body {
   margin: 0;
   padding: 0;
@@ -9,6 +8,10 @@ header {
   background-color: #1d72c2;
   display: grid;
   grid-row: 1fr 5fr 2fr;
+}
+header img {
+  width: 60px;
+  cursor: pointer;
 }
 header ul {
   display: flex;
@@ -46,69 +49,16 @@ header ul li #contactos::after {
 #section1 h1 {
   margin-left: 30px;
 }
-#section1 #btn-search {
-  position: relative;
-  width: 20%;
-  height: 35px;
-  top: 80px;
-  right: 250px;
-  background-color: white;
-  color: #0683f9;
-  border-radius: 4px;
-  cursor: pointer;
-}
-#section1 #jstree {
-  position: absolute;
-  left: 2.5%;
-  top: 20vh;
-  z-index: 4;
-  grid-column: 1/1;
-  background-color: white;
-  border: 1px solid #ddd;
-}
-#section1 #jstree .nested {
-  display: none;
-}
-#section1 #jstree .caret {
-  cursor: pointer;
-  -webkit-user-select: none;
-  /* Safari 3.1+ */
-  -moz-user-select: none;
-  /* Firefox 2+ */
-  -ms-user-select: none;
-  /* IE 10+ */
-  user-select: none;
-  position: relative;
-  right: 5%;
-  bottom: 30px;
-}
-#section1 #jstree .caret::before {
-  content: "▶";
-  color: black;
-  display: inline-block;
-  margin-right: 6px;
-}
-#section1 #jstree .caret-down::before {
-  /* IE 9 */
-  /* Safari */
-  transform: rotate(90deg);
-}
-#section1 #jstree a {
+#section1 a {
   text-decoration: none;
   color: black;
 }
-#section1 #jstree li {
+#section1 li {
   list-style: none;
   margin: 20px 0px;
 }
-#section1 #jstree input {
+#section1 input {
   align-content: left;
-}
-#section1 #jstree .input-jstree {
-  position: relative;
-  left: 10%;
-  align-content: center;
-  width: 20%;
 }
 #section1 #contactos {
   position: relative;
@@ -174,11 +124,15 @@ header ul li #contactos::after {
   background-color: #e8e8e8;
   border-radius: 10px;
 }
-#section2 .color-interes-75, #section2 .color-interes-25, #section2 .color-interes-50 {
-  width: 75%;
+#section2 .color-interes-100, #section2 .color-interes-25, #section2 .color-interes-50, #section2 .color-interes-75 {
+  width: 100%;
   height: 10px;
-  background-color: #ff6f00;
   border-radius: 10px;
+  background-color: #de0028;
+}
+#section2 .color-interes-75 {
+  width: 75%;
+  background-color: #ff6f00;
 }
 #section2 .color-interes-50 {
   width: 50%;
@@ -189,19 +143,33 @@ header ul li #contactos::after {
   background-color: #1cc1f5;
 }
 
-/*.table-order {
-  table {
-    border-collapse: collapse;
-    width: 95%;
-    border: 1px solid #ddd;
-    margin: 2.5%;
-    font-weight: normal;
-    th {
-      font-weight: normal;
-      padding: 30px;
-      border-bottom: 1px solid #ddd;
-    }
+.dt-buttons {
+  position: relative;
+  left: 64vw;
+  width: 185px;
+  bottom: 45px;
+  display: none;
+  flex-direction: column;
+  transition: 1.5s;
+}
 
-    }
-  }
-}*//*# sourceMappingURL=Header.css.map */
+button .dt-button, #section1 .buttons input .dt-button {
+  border-color: #1d72c2;
+  background-color: white;
+  width: 75px;
+  height: 45px;
+  color: #1d72c2;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button .button-html5, #section1 .buttons input .button-html5 {
+  border-color: #1d72c2;
+  background-color: white;
+  height: 45px;
+  color: #1d72c2;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}/*# sourceMappingURL=Header.css.map */

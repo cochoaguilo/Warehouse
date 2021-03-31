@@ -16,6 +16,9 @@
     <title>Region/Ciudad</title>
   </head>
   <style>
+    ul{
+      list-style-type: none;
+    }
     #ag-reg {
       float: right;
       position: relative;
@@ -45,12 +48,9 @@
   left: 2.5%;
   top: 20vh;
   z-index: 4;
-  -ms-grid-column: 1;
-  grid-column: 1/1;
-  background-color: white;
-  border: 1px solid #ddd;
+  width: 70%;
 }
-    .btn-pais, .btn-ciudad, .btn-edit, .btn-delete{
+    .btn-pais, .btn-ciudad, .btn-edit, .btn-delete, .submit-btn, .close-submit{
         position: relative;
         border-radius: 4px;
       font-size: 16px;
@@ -85,7 +85,25 @@
         border-color: #bb3e3f;
         color: white;
     }
-
+    .input-txt{
+      height: 35px;
+      font-size: 16px;
+    }
+    .input-txt, .submit-btn, .close-submit{
+     
+      margin: 10px;
+    }
+    
+    .submit-btn{
+      border-color: #ff6f00;
+      background-color: aliceblue;
+    }
+    .submit-btn:hover{
+      background-color: #1cc1f5;
+    }
+    .close-submit:hover{
+      background-color: #de0028;
+    }
      .caret {
   cursor: pointer;
   -webkit-user-select: none;
@@ -113,11 +131,20 @@
   /* Safari */
   transform: rotate(90deg);
 }
+
+.nested {
+  display: none;
+}
+
+.active {
+  display: block;
+}
   </style>
   <body>
     <header>
-      <img src="" alt="" />
+      
       <nav>
+        <a href="./index.html"><img src="./Assets/logo.webp" alt="logo" /></a>
         <ul>
           <li><a href="Header.html" id="contactos">Contactos</a></li>
           <li><a href="Usuarios.html">Usuarios</a></li>
@@ -129,7 +156,7 @@
     <button id="ag-reg">Agregar Región</button>
     <div class="jstree" id="jstree">
        
-      <ul id="container" class="nested">
+      <ul id="container">
         <!--<span class='caret'>
         </span>-->
         

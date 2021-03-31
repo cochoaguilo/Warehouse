@@ -5,13 +5,12 @@ const upload = multer({dest: 'mysql://root:@localhost:3306/delilah'});
 const contactosController = require('../controllers/contactos.controllers');
 const middleware = require('../middleware')
 
-router.get('/',contactosController.getContactos);
+router.get('/', middleware.autentificarUser, contactosController.getContactos);
 
-router.post('/', /*middleware.autentificarAdmin*/ contactosController.newContacto)
+router.post('/', middleware.autentificarUser,  contactosController.newContacto)
 
+router.put('/:id', middleware.autentificarUser, contactosController.updateContacto)
 
-//router.put('/:id',contactosController)
-
-router.delete('/:id', middleware.autentificarAdmin, middleware.autentificarUser, contactosController.deleteContacto)
+router.delete('/:id',  middleware.autentificarUser, contactosController.deleteContacto)
 
 module.exports = router;

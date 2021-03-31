@@ -19,11 +19,11 @@
 	}
 });*/
   
-    $('#jstree').on("changed.jstree", function (e, data) {
+   /* $('#jstree').on("changed.jstree", function (e, data) {
         //console.log(data.selected);
     });
       
       $('.caret').on('changed.jstree', function(){
          $('#jstree').jstree(true).select_node('ul');
           
-      })
+      })*/

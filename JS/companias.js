@@ -1,17 +1,13 @@
 let companiasEndpoint = '/companias';
-let container = document.getElementById('container');
-let arrayCompanias = []
+let container = document.getElementById('container-companias');
+let arrayCompanias = [];
 let h3 = document.getElementById('h3')
 
 
 
     
-   let table = $('#container').DataTable({
+   let table = $('#container-companias').DataTable({
 
-    /*dom: 'lBfrtip',
-    buttons: [
-        'pageLength','copy', 'csv', 'excel'
-    ]*/
 });
 
 
@@ -60,8 +56,4 @@ let h3 = document.getElementById('h3')
    
   
 
-
-
-   
-console.log(arrayCompanias);
 

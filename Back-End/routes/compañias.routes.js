@@ -3,13 +3,13 @@ const router = express.Router();
 const companiasControllers = require('../controllers/compañias.controllers');
 const middleware = require('../middleware')
 
-router.get('/',/*middleware.autentificarAdmin, middleware.autentificarUser,*/ companiasControllers.getCompanias)
+router.get('/', middleware.autentificarUser, companiasControllers.getCompanias)
 
-router.post('/', /*middleware.autentificarAdmin,middleware.autentificarUser,*/ companiasControllers.newCompania)
+router.post('/', middleware.autentificarUser, companiasControllers.newCompania)
 
-router.put('/:id', companiasControllers.updateCompania);
+router.put('/:id',middleware.autentificarUser, companiasControllers.updateCompania);
 
-router.delete('/:id',/*middleware.autentificarAdmin,middleware.autentificarUser,*/ companiasControllers.deleteCompania)
+router.delete('/:id',middleware.autentificarUser, companiasControllers.deleteCompania)
 
 
 module.exports = router

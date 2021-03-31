@@ -29,8 +29,8 @@
   
   <body>
     <header>
-      <img src="" alt="" />
       <nav>
+        <a href="./index.html"><img src="./Assets/logo.webp" alt="logo" /></a>
         <ul>
           <li><a href="Header.html" id="contactos">Contactos</a></li>
           <li><a href="Usuarios.html">Usuarios</a></li>
@@ -42,7 +42,7 @@
    <section class="table-order">
       <h1>Compañias</h1>
       <button id="ag-compania">Agregar</button>
-      <table id="container" class="display" style="width: 100%;">
+      <table id="container-companias" class="display">
         <thead>
           <tr>
             <th>Nombre</th>
@@ -56,8 +56,8 @@
         </thead>
       </table>
       </section>
-    <!-- Modal Contactos-->
-    <div id="myModal" class="modal">
+    <!-- Modal Compania-->
+    <div id="modal-compania" class="modal">
       <div class="modal-content">
         <div class="modal-title">
           <h3 id="h3">Nueva Compañia</h3>
@@ -102,13 +102,14 @@
         </div>
       </div>
     </div>
+    <!--Modal Delete-->
     <div class="modal" id="modal-delete">
       <div class="modal-conten">
         <h2>¡ATENCION!</h2>
         <h4></h4>
         <div class="modal-footer">
           <button id="cancelar-delete" class="modal-button">Cancelar</button>
-          <button id="delete" class="modal-button"><em class="fa fa-trash"></em>Delete</button>
+          <button id="delete-compania" class="modal-button"><em class="fa fa-trash"></em>Delete</button>
         </div>
       </div>
       

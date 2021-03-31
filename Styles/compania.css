@@ -30,19 +30,18 @@ table {
   color: white;
 }
 
-#container_wrapper {
+#container-companias_wrapper {
   position: relative;
-  height: 400px;
 }
 
-#container_info, #container_paginate {
+#container-companias_info, #container-companias_paginate {
   position: relative;
   top: 150px;
 }
 
-#container_length, #container_filter {
+#container-companias_length, #container-companias_filter {
   position: relative;
-  top: 40px;
+  top: 100px;
 }
 
 td {

@@ -136,7 +136,7 @@
   flex-direction: column;
   position: relative;
 }
-.modal .modal-head form input[type=text], .modal .modal-head form input[type=email] {
+.modal .modal-head form input[type=text], .modal .modal-head form input[type=email], .modal .modal-head form [type=tel] {
   position: relative;
   width: 80%;
   height: 2px;
@@ -208,7 +208,7 @@
   border: none;
 }
 
-#modal-delete {
+#modal-delete, #modal-delete-contactos {
   position: absolute;
   top: 20%;
   left: 30%;

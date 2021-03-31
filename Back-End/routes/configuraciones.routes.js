@@ -5,10 +5,10 @@ const upload = multer({dest: 'mysql://root:@localhost:3306/warehouse'});
 const configControllers = require('../controllers/configuraciones.controllers');
 const middleware = require('../middleware')
 
-router.get('/interes',/*middleware.autentificarAdmin, middleware.autentificarUser*/ configControllers.getInteres)
+router.get('/interes',middleware.autentificarUser,configControllers.getInteres)
 
-router.get('/preferencias',  configControllers.getPreferencias);
+router.get('/preferencias',middleware.autentificarUser, configControllers.getPreferencias);
 
-router.get('/canal',/*middleware.autentificarAdmin,middleware.autentificarUser, */ configControllers.getCanal)
+router.get('/canal',middleware.autentificarUser,  configControllers.getCanal)
 
 module.exports = router

@@ -7,20 +7,19 @@ let form = document.getElementById('form-login')
 $('#form-login').submit(function (e) { 
   e.preventDefault();
   
-  let email = document.getElementsByName('correo')[0].value
-  let contrasena = document.getElementsByName('contrasena')[0].value
+  let email = document.getElementById('correo').value;
+  let contrasena = document.getElementById('contrasena').value;
   
   const body ={
     correo:email,
-    constrasena: contrasena
+    contrasena: contrasena
   }
-  const formData = new FormData();
-  formData.append('body',body)
+  
   //console.log(body);
-  apiFetchPOST('/usuarios/login', formData).then(data=>{
+  apiFetchPOST('/usuarios/login', body).then(data=>{
     console.log(data);
     if(data.token){
-    alert(data.msj)
+    sessionStorage.setItem('token', data.token)
     window.location.href = "./Header.html"
     }
     else{

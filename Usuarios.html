@@ -42,8 +42,8 @@
     select{
         background-color: #e8e8e8;
         position: relative;
-        width: 35%;
-        left: 51%;
+        width: 30%;
+        left: 50%;
     }
     button{
         position: relative;
@@ -65,8 +65,9 @@
 </style>
 <body>
     <header>
-        <img src="" alt="">
+     
         <nav>
+            <a href="./index.html"><img src="./Assets/logo.webp" alt="logo" /></a>
             <ul>
                 <li><a href="Header.html">Contactos</a></li>
                 <li><a href="">Usuarios</a></li>
@@ -77,20 +78,26 @@
     </header>
     <main>
         
-        <form action="" method="POST">
+        <form id="form">
             <h1>Crear Usuario</h1>
             <label for="nombre">Nombre<input type="text" name="nombre" id="nombre"></label> 
             <label for="apellido">Apellido<input type="text" name="Apellido" id="apellido"></label>
             <label for="email">Email<input type="email" name="email" id="email"></label>
-            <label for="perfil">Perfil</label><select name="perfil" id="perfil">
+            <label for="perfil">Perfil</label>
+            <select name="perfil" id="perfil">
                 <option value="admin">admin</option>
                 <option value="basico">basico</option>
             </select>
         
             <label for="contraseña">Contraseña<input type="password" name="contraseña" id="contraseña"></label>
             <label for="repcontraseña">Repetir contraseña<input type="password" name="repcontraseña" id="repcontraseña"></label>
-            <button type="submit">Crear</button>
+            <button type="submit" id="submit">Crear</button>
         </form>
     </main>
+    <script src="./JS/fetch.js"></script>
+    <script src="./JS/form.js"></script>
+    <script>
+        
+    </script>
 </body>
 </html>

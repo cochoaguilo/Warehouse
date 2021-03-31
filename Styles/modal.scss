@@ -128,7 +128,7 @@
                 position: relative;
                 
             }
-            input[type=text], input[type=email] {
+            input[type=text], input[type=email], [type=tel] {
                 position: relative;
                 width: 80%;
                 height: 2px;
@@ -159,6 +159,7 @@
             flex-direction: column;
             position: relative;
             left: 15%;
+           
         }
         select{
             margin: 5px;
@@ -179,6 +180,7 @@
             color: gray;
             border-color: gray;
             cursor: pointer;
+            
         }
        }
 
@@ -217,3 +219,7 @@
       background-color: #e8e8e8;
       height: 200px;
   }
+  #modal-delete-contactos{
+    @extend #modal-delete
+  }
+ 
