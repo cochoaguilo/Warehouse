@@ -16,26 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `canal_de_contacto`
+-- Table structure for table `canal_Contacto`
 --
 
-DROP TABLE IF EXISTS `canal_de_contacto`;
+DROP TABLE IF EXISTS `canal_Contacto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `canal_de_contacto` (
+CREATE TABLE `canal_Contacto` (
   `canal` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `id_canal` int NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id_canal`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `canal_de_contacto`
+-- Dumping data for table `canal_Contacto`
 --
 
-LOCK TABLES `canal_de_contacto` WRITE;
-/*!40000 ALTER TABLE `canal_de_contacto` DISABLE KEYS */;
-/*!40000 ALTER TABLE `canal_de_contacto` ENABLE KEYS */;
+LOCK TABLES `canal_Contacto` WRITE;
+/*!40000 ALTER TABLE `canal_Contacto` DISABLE KEYS */;
+INSERT INTO `canal_Contacto` VALUES ('Instagram',1),('Facebook',2),('WhatsApp',3),('Email',4),('Telefono',5);
+/*!40000 ALTER TABLE `canal_Contacto` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -52,7 +53,7 @@ CREATE TABLE `ciudades` (
   PRIMARY KEY (`id_ciudad`),
   KEY `id_pais` (`id_pais`),
   CONSTRAINT `ciudades_ibfk_1` FOREIGN KEY (`id_pais`) REFERENCES `paises` (`id_pais`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -61,6 +62,7 @@ CREATE TABLE `ciudades` (
 
 LOCK TABLES `ciudades` WRITE;
 /*!40000 ALTER TABLE `ciudades` DISABLE KEYS */;
+INSERT INTO `ciudades` VALUES ('Salta',1,1),('Nueva York',4,6),('Medellin',6,7),('Montevideo',9,4),('Buenos Aires',10,1);
 /*!40000 ALTER TABLE `ciudades` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -78,8 +80,10 @@ CREATE TABLE `compania` (
   `telefono` varchar(100) DEFAULT NULL,
   `id_ciudad` int NOT NULL,
   `id_compania` int NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id_compania`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id_compania`),
+  KEY `id_ciudad` (`id_ciudad`),
+  CONSTRAINT `compania_ibfk_1` FOREIGN KEY (`id_ciudad`) REFERENCES `ciudades` (`id_ciudad`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -88,6 +92,7 @@ CREATE TABLE `compania` (
 
 LOCK TABLES `compania` WRITE;
 /*!40000 ALTER TABLE `compania` DISABLE KEYS */;
+INSERT INTO `compania` VALUES ('Facebook','Santa Rosa 2801','facebook@hotmail.com','01123971019',9,14);
 /*!40000 ALTER TABLE `compania` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,12 +117,17 @@ CREATE TABLE `contactos` (
   `cuenta_usuario` varchar(100) DEFAULT NULL,
   `id_preferencias` int DEFAULT NULL,
   PRIMARY KEY (`id_contacto`),
-  KEY `id_ciudad` (`id_ciudad`),
+  KEY `id_compania` (`id_compania`),
   KEY `id_canal` (`id_canal`),
-  KEY `id_preferencias` (`id_preferencias`),
   KEY `id_interes` (`id_interes`),
-  KEY `id_compania` (`id_compania`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `id_preferencias` (`id_preferencias`),
+  KEY `id_ciudad` (`id_ciudad`),
+  CONSTRAINT `contactos_ibfk_1` FOREIGN KEY (`id_compania`) REFERENCES `compania` (`id_compania`),
+  CONSTRAINT `contactos_ibfk_2` FOREIGN KEY (`id_canal`) REFERENCES `canal_Contacto` (`id_canal`),
+  CONSTRAINT `contactos_ibfk_3` FOREIGN KEY (`id_interes`) REFERENCES `interes` (`id_interes`),
+  CONSTRAINT `contactos_ibfk_4` FOREIGN KEY (`id_preferencias`) REFERENCES `preferencias` (`id_preferencias`),
+  CONSTRAINT `contactos_ibfk_5` FOREIGN KEY (`id_ciudad`) REFERENCES `ciudades` (`id_ciudad`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,6 +136,7 @@ CREATE TABLE `contactos` (
 
 LOCK TABLES `contactos` WRITE;
 /*!40000 ALTER TABLE `contactos` DISABLE KEYS */;
+INSERT INTO `contactos` VALUES ('Marcos',14,'Junior',3,5,9,10,'Aguilo','marcosaguilo@gmail.com','Santa Rosa 2801','@cocho',1);
 /*!40000 ALTER TABLE `contactos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -167,7 +178,7 @@ CREATE TABLE `paises` (
   PRIMARY KEY (`id_pais`),
   KEY `id_region` (`id_region`),
   CONSTRAINT `paises_ibfk_1` FOREIGN KEY (`id_region`) REFERENCES `regiones` (`id_region`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -176,6 +187,7 @@ CREATE TABLE `paises` (
 
 LOCK TABLES `paises` WRITE;
 /*!40000 ALTER TABLE `paises` DISABLE KEYS */;
+INSERT INTO `paises` VALUES ('Argentina',1,1),('Uruguay',4,1),('Estados Unidos',6,2),('Colombia',7,1),('Canada',8,2),('España',9,9);
 /*!40000 ALTER TABLE `paises` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -190,7 +202,7 @@ CREATE TABLE `perfil` (
   `nombre_perfil` varchar(100) NOT NULL,
   `id_perfil` int NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id_perfil`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -199,6 +211,7 @@ CREATE TABLE `perfil` (
 
 LOCK TABLES `perfil` WRITE;
 /*!40000 ALTER TABLE `perfil` DISABLE KEYS */;
+INSERT INTO `perfil` VALUES ('admin',1),('basico',2);
 /*!40000 ALTER TABLE `perfil` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -237,7 +250,7 @@ CREATE TABLE `regiones` (
   `nombre` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `id_region` int NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id_region`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -246,6 +259,7 @@ CREATE TABLE `regiones` (
 
 LOCK TABLES `regiones` WRITE;
 /*!40000 ALTER TABLE `regiones` DISABLE KEYS */;
+INSERT INTO `regiones` VALUES ('Sud-America',1),('Norte-America',2),('Europa',9),('Asia',10);
 /*!40000 ALTER TABLE `regiones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -266,7 +280,7 @@ CREATE TABLE `usuarios` (
   PRIMARY KEY (`id_usuario`),
   KEY `id_perfil` (`id_perfil`),
   CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`id_perfil`) REFERENCES `perfil` (`id_perfil`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -275,7 +289,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES ('marcos','aguilo','marcosaguilo@gmail.com',1,'1234',1),('esteban	','quito','estebanquito@gmail.com',2,'4321',2);
+INSERT INTO `usuarios` VALUES ('marcos','aguilo','marcosaguilo@gmail.com',1,'1234',1),('esteban	','quito','estebanquito@gmail.com',2,'4321',2),('Manuel','Belgrano','manuelbelgrano@hotmail.com',1,'$2b$10$VER5ghtVYFIclF8D4Gafm.OV423peQ/9LRafYYxSQ6psnrj57GEx6',6),('Raul','Perez','raulcito@hotmail.com',1,'$2b$10$7C2tBehokZPVVRoOVA7s4eYl05./vFov0ZVU6Sy4auZ2m9nDrZndG',7);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -292,4 +306,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-22 22:19:40
+-- Dump completed on 2021-03-31 18:54:51

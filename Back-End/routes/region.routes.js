@@ -1,7 +1,5 @@
 const express = require("express");
 const router = express.Router()
-const multer = require('multer')
-const upload = multer({dest: 'mysql://root:@localhost:3306/warehouse'});
 const regionControllers = require('../controllers/region.controllers');
 const middleware = require('../middleware')
 
