@@ -20,10 +20,12 @@ $('#form-login').submit(function (e) {
     console.log(data);
     if(data.token){
     sessionStorage.setItem('token', data.token)
+    sessionStorage.setItem('admin', data.tipo)
     window.location.href = "./Header.html"
     }
     else{
       alert("intente nuevamente")
+      
     }
   
   })

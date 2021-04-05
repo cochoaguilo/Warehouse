@@ -13,11 +13,13 @@ const autentificarUser = (req,res,next) =>{
     let clave = "marcos21";
     const jwtClient = jwtToken.split(" ")[1];
     jwt.verify(jwtClient, clave, (error, decoded) => {
+        
         if (error) {
             return res.status(401).json({ message: "Token Expired" });
         }
         
-        if (decoded.tipo <=1) {
+        if (decoded.tipo ==2) {
+            
             next();
         }else{
             return res.status(401).json({message: 'usuario no permitido'})

@@ -84,4 +84,14 @@ const apiFetchUPDATE = async (endpoint, body) => {
     }
 }    
 
- 
+let usuariosLogin = document.getElementById('usuarios-header')
+
+let admin = sessionStorage.getItem('admin')
+
+if (admin !=1 ) {
+  console.log('no es admin');
+  usuariosLogin.remove();
+}
+else{
+  console.log('si es admin');
+}

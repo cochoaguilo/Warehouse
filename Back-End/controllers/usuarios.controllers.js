@@ -53,7 +53,7 @@ const loginUsuario = async(req, res) => {
         let token = jwt.sign({correo: result[0].correo, tipo: result[0].id_perfil}, clave);
        
         if (await bcrypt.compare(contrasena, result[0].contrasena)) {
-          res.status(200).json({msj: 'usuario loggeado', token: token});
+          res.status(200).json({msj: 'usuario loggeado', token: token, tipo:result[0].id_perfil});
         }else{
           res.status(404).json({msj: 'contraseña incorrecta'});
         }

@@ -117,3 +117,4 @@ $('#exportar').click(function () {
   
   $('.dt-buttons').toggle();
 });
+
