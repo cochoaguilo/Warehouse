@@ -46,7 +46,7 @@ const loginUsuario = async(req, res) => {
     
       if(result.length ==0){
         res.send("usuario incorrecto");
-        console.log(result);
+        
       }
       if (result.length == 1) {
        // console.log(result[0].id_perfil);

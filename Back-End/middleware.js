@@ -18,7 +18,7 @@ const autentificarUser = (req,res,next) =>{
             return res.status(401).json({ message: "Token Expired" });
         }
         
-        if (decoded.tipo ==2) {
+        if (decoded.tipo ==2 || decoded.tipo ==1) {
             
             next();
         }else{
